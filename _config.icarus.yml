@@ -3,11 +3,11 @@ version: 4.0.0
 # Icarus theme variant, can be "default" or "cyberpunk"
 variant: default
 # Path or URL to the website's logo
-logo: /img/logo.svg
+logo: /img/logo.png
 # Page metadata configurations
 head:
     # URL or path to the website's icon
-    favicon: /img/favicon.svg
+    favicon: /img/favicon.png
     # Web application manifests configuration
     # https://developer.mozilla.org/en-US/docs/Web/Manifest
     manifest:
@@ -19,7 +19,7 @@ head:
         # The start URL of the web application
         start_url: https://blog.yamat47.me
         # The default theme color for the application
-        theme_color: red
+        theme_color:
         # A placeholder background color for the application page to display
         # before its stylesheet is loaded
         background_color:
