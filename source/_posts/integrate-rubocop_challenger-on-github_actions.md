@@ -11,6 +11,8 @@ tags:
 
 **この内容は [Zenn.dev でも公開しています。](https://zenn.dev/yamat47/articles/219e14ebcf31a1d13ff4)**
 
+* （2020年1月5日 追記）[GitHub Actions の設定ファイルの記載が間違っていたので修正しました。](https://github.com/yamat47/blog/commit/db6af7aca311319ed7c3a87f46e0cf085c63c8e3)
+
 RuboCop Challenger って知っていますか？
 ----
 
