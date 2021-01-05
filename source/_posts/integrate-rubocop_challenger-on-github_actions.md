@@ -38,7 +38,7 @@ name: "RuboCop Challenge"
 
 on:
   schedule:
-    cron: '30 23 * * 1,2,3' # この設定の場合、火水木のAM8:30に自動でPRが作られます。
+    - cron: '30 23 * * 2,3,4' # この設定の場合、火水木のAM8:30に自動でPRが作られます。
 
 jobs:
   create-pr:
