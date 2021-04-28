@@ -1,6 +1,6 @@
 ---
 title: '他人が批判をしているのを見聞きするのが苦手'
-date: '2020-7-16 20:03:36'
+date: '2020/7/16 20:03:36'
 thumbnail: '/images/thumbnails/refrain-from-criticising-others.jpg'
 ---
 

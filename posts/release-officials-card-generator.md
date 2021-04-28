@@ -1,6 +1,6 @@
 ---
 title: 'アメフトの審判が使うメモを生成するサイトを作った'
-date: '2021-01-01 17:53:41'
+date: '2021/01/01 17:53:41'
 thumbnail: '/images/thumbnails/release-officials-card-generator.jpg'
 ---
 

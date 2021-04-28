@@ -1,6 +1,6 @@
 ---
 title: 'ブログを自分でホストすることにしました'
-date: '2020-10-15 22:53:36'
+date: '2020/10/15 22:53:36'
 thumbnail: '/images/thumbnails/create-blog.jpg'
 ---
 
