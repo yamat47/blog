@@ -1,6 +1,7 @@
 ---
 title: '『ユニコーン企業のひみつ』を読んだ'
 date: '2021/04/28 22:00'
+thumbnail: '/images/thumbnails/secrets-of-unicorns.jpg'
 ---
 数日前に『ユニコーン企業のひみつ』という本が出版されました。
 翻訳者の一人である角谷さん（[@kakutani](https://twitter.com/kakutani)）のツイートでそのことを知って、興味が沸いたので早速読んでみました。
