@@ -30,12 +30,11 @@ export default function Home({
           <Link href={`/posts/${id}`} key={id}>
             <a className='group'>
               <article>
-                <div className='flex flex-shrink-0 relative justify-center items-center w-full h-48 mb-2 border group-hover:opacity-50'>
-                  <Image
+                <div className='flex flex-shrink-0 relative justify-center items-center w-full mb-2 group-hover:opacity-50'>
+                  <img
                     src={thumbnail || '/images/thumbnail.png'}
                     alt={title}
-                    layout='fill'
-                    objectFit='cover'
+                    className='rounded-md'
                   />
                 </div>
                 <h1 className='font-semibold mb-2'>
