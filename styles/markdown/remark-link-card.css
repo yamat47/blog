@@ -1,6 +1,7 @@
 .markdown .rlc-container {
   width: 100%;
   max-width: 800px;
+  height: 120px;
   margin: 0 auto 2rem;
 
   color: black;
@@ -15,11 +16,14 @@
 }
 
 .markdown .rlc-container:hover {
-  background-color: rgba(251, 239, 239, 0.7);
+  background-color: rgba(239, 239, 239, 0.7);
   text-decoration: none;
 }
 
 .markdown .rlc-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   overflow: hidden;
   padding: 0.75rem 1rem;
   flex: 4 1 100px;
@@ -40,7 +44,6 @@
 
 .markdown .rlc-description {
   max-height: 1.55rem;
-  margin-top: 0.5rem;
   font-size: 0.875rem;
   color: #374151;
   white-space: nowrap;
@@ -49,7 +52,6 @@
 }
 
 .markdown .rlc-url-container {
-  margin-top: 0.5rem;
   display: flex;
   align-items: center;
   font-size: 0.75rem;
