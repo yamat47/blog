@@ -32,7 +32,7 @@ export function getSortedPostsData() {
     return {
       id,
       content: removeMd(matterResult.content),
-      ...(matterResult.data as { date:string, title: string })
+      ...(matterResult.data as { date: string, title: string, thumbnail?: string })
     }
   })
 
