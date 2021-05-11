@@ -22,6 +22,10 @@ export function generateFeedXml() {
       guid: post.id,
       author: 'Takuya Yamaguchi',
       date: new Date(post.date),
+      enclosure: {
+        url: `https://blog.yamat47.me${post.thumbnail}`,
+        type: 'image/jpeg',
+      },
     });
   })
 
