@@ -24,11 +24,13 @@
     "remark-highlight.js": "^6.0.0",
     "remark-html": "^13.0.1",
     "remark-link-card": "^1.2.3",
-    "remove-markdown": "^0.3.0"
+    "remove-markdown": "^0.3.0",
+    "rss": "^1.2.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",
+    "@types/rss": "^0.0.28",
     "autoprefixer": "^10.2.4",
     "postcss": "^8.2.6",
     "tailwindcss": "^2.0.3",
