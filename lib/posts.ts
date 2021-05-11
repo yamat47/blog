@@ -81,7 +81,7 @@ export async function getPostData(id: string) {
     .use(html)
     .use(highlight)
     .use(externalLinks)
-    .use(linkCard)
+    .use(linkCard, { shortenUrl: true })
     .process(matterResult.content)
   const contentHtml = processedContent.toString()
 
