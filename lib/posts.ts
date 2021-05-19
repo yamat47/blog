@@ -8,6 +8,8 @@ import breaks from 'remark-breaks'
 import html from 'remark-html'
 import highlight from 'remark-highlight.js'
 import externalLinks from 'remark-external-links'
+import remarkEmbdder from '@remark-embedder/core'
+import oembedTransformer from '@remark-embedder/transformer-oembed'
 import linkCard from 'remark-link-card'
 
 import isPreviewing from './preview'
@@ -81,6 +83,7 @@ export async function getPostData(id: string) {
     .use(html)
     .use(highlight)
     .use(externalLinks)
+    .use(remarkEmbdder, { transformers: [oembedTransformer] })
     .use(linkCard, { shortenUrl: true })
     .process(matterResult.content)
   const contentHtml = processedContent.toString()
