@@ -30,6 +30,7 @@ export default function Post({
         <meta property="og:title" content={`${postData.title} | ${siteTitle}`} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_BASE_URL}${ogpImagePath}`} />
+        <script src="https://platform.twitter.com/widgets.js" />
       </Head>
       <article className='max-w-screen-md mx-auto px-2 md:px-4 lg:px-8' >
         <header className='mt-3 md:mt-6 mb-6 md:mb-12'>
