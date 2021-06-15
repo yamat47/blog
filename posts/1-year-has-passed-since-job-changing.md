@@ -1,6 +1,6 @@
 ---
 title: 'クラッソーネにジョインして一年が経った'
-date: '2021/06/15 08:24'
+date: '2021/06/15 00:20'
 thumbnail: '/images/thumbnails/1-year-has-passed-since-job-changing.jpg'
 ---
 [株式会社クラッソーネ](https://www.crassone.co.jp/) にソフトウェアエンジニアとして入社してちょうど一年が経ちました。
