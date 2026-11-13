@@ -4,6 +4,9 @@
 #  - minor / patch of development dependencies: one PR (less noise)
 #  - major, and every bump of what the site is built with (astro): individual PRs, so a change that
 #    can alter the pages is reviewed on its own
+#  - astro and @astrojs/markdown-satteri: one PR. astro depends on an exact version of the
+#    processor, and astro.config.ts builds the processor from the copy this repository declares,
+#    so a bump of one alone would leave two versions installed
 version: 2
 
 updates:
@@ -24,6 +27,10 @@ updates:
       prefix: chore(deps)
       prefix-development: chore(deps-dev)
     groups:
+      astro:
+        patterns:
+          - astro
+          - "@astrojs/markdown-satteri"
       dev-dependencies:
         dependency-type: development
         update-types:
