@@ -16,6 +16,10 @@ export default defineConfig({
     // they were on Hatena Blog.
     processor: satteri({ features: { smartPunctuation: false } }),
 
+    // TODO: rewrite a link to another post's file (../<folder>/index.md) into its URL
+    // (/entry/<id>) and fail the build when the target is missing. Until then those links are
+    // emitted as written and do not resolve, so this comes before the deploy runs on push.
+
     // The highlighter writes var(--astro-code-*) instead of colors of its own, so code blocks take
     // theirs from src/styles/tokens.css like everything else.
     shikiConfig: { theme: "css-variables" },
