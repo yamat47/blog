@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import { formatDay } from "../lib/date";
+import { getPosts, postPath } from "../lib/posts";
+
+const posts = await getPosts();
+---
+
+<Base path="/">
+  <ul class="post-list">
+    {
+      posts.map((post) => (
+        <li>
+          <time class="post-date" datetime={post.data.publishedAt.toISOString()}>
+            {formatDay(post.data.publishedAt)}
+          </time>
+          <a href={postPath(post)}>{post.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

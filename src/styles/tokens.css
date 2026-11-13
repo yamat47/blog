@@ -1,0 +1,49 @@
+/*
+ * Every color, size, weight and font of the site. No other stylesheet or component holds one of
+ * these as a literal; they read the variables. The look is a plain placeholder until the design
+ * system (pylon) exists: adopting it means replacing this file with its tokens, not hunting
+ * values elsewhere.
+ */
+:root {
+  --color-surface: #ffffff;
+  --color-ink: #1f2328;
+  --color-ink-muted: #59636e;
+  --color-link: #0969da;
+  --color-border: #d1d9e0;
+
+  --font-sans: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --weight-bold: 700;
+  --leading-tight: 1.4;
+  --leading-body: 1.9;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-10: 2.5rem;
+
+  --radius-sm: 4px;
+  --border-width: 1px;
+
+  /* Syntax highlighting. The names are the ones Astro's css-variables theme reads. */
+  --astro-code-foreground: #1f2328;
+  --astro-code-background: #f6f8fa;
+  --astro-code-token-constant: #0550ae;
+  --astro-code-token-string: #0a3069;
+  --astro-code-token-string-expression: #0a3069;
+  --astro-code-token-comment: #59636e;
+  --astro-code-token-keyword: #cf222e;
+  --astro-code-token-parameter: #953800;
+  --astro-code-token-function: #8250df;
+  --astro-code-token-punctuation: #1f2328;
+  --astro-code-token-link: #0969da;
+
+  /* Width of a line of body text. */
+  --measure: 42rem;
+}

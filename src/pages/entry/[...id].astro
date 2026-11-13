@@ -1,0 +1,32 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { formatDay } from "../../lib/date";
+import { getPosts, type Post, postPath } from "../../lib/posts";
+
+// A rest parameter, because the id of a post moved from Hatena Blog has slashes in it
+// (2026/01/01/130022).
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} path={postPath(post)}>
+  <article>
+    <time class="post-date" datetime={post.data.publishedAt.toISOString()}>
+      {formatDay(post.data.publishedAt)}
+    </time>
+    <h1 class="post-title">{post.data.title}</h1>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+# Types Astro generates from the content collections
+.astro/
+*.tsbuildinfo
+*.log
+.DS_Store
+.env
+.env.*
+.claude/settings.local.json
+.tmp

@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+import { SITE } from "../site";
+
+interface Props {
+  /** The page's own title; omitted on the top page, which is titled by the site alone. */
+  title?: string;
+  /** The page's URL path, as it should appear in the canonical link. */
+  path: string;
+}
+
+const { title, path } = Astro.props;
+const fullTitle = title ? `${title} - ${SITE.title}` : SITE.title;
+const canonical = new URL(path, Astro.site);
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-title" href="/">{SITE.title}</a>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+  </body>
+</html>

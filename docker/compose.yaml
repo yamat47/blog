@@ -1,0 +1,40 @@
+name: blog
+
+x-base: &base
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+  image: blog-dev
+  volumes:
+    - ..:/workspace
+    # node_modules is not shared with the host. The native binaries of rolldown / Biome / sharp differ
+    # between darwin and linux, and heavy file I/O across a bind mount is slow
+    - node_modules:/workspace/node_modules
+    - pnpm-store:/home/node/.local/share/pnpm/store
+
+services:
+  # Runs Makefile tasks (docker compose run --rm)
+  workspace:
+    <<: *base
+    command: sleep infinity
+
+  # dev server for the site (make up / make down)
+  dev:
+    <<: *base
+    command: pnpm run dev
+    ports:
+      - "4321:4321"
+    environment:
+      # In some environments (such as colima's default), edits on the host do not reach the container
+      # via inotify, so pick them up by polling. The chokidar bundled with Vite reads this variable
+      CHOKIDAR_USEPOLLING: "true"
+    # make up is docker compose up --wait, which waits until this passes
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:4321/').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+      interval: 2s
+      start_period: 60s
+      start_interval: 1s
+
+volumes:
+  node_modules:
+  pnpm-store:
