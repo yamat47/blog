@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(make:*)",
+      "Bash(docker compose -f docker/compose.yaml ps:*)",
+      "Bash(docker compose -f docker/compose.yaml logs:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git blame:*)",
+      "Bash(git branch:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git merge-base:*)",
+      "Bash(git config user.name)",
+      "Bash(git config user.email)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git restore:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(date:*)",
+      "Bash(ls:*)",
+      "Skill(review-pr)",
+      "Skill(writing-conventions)",
+      "Skill(typescript-idioms)",
+      "Skill(github-actions-workflows)",
+      "Skill(review-dependency-bump)",
+      "Skill(review-skill-update)",
+      "WebFetch(domain:github.com)",
+      "Edit(.tmp/**)"
+    ],
+    "deny": [
+      "Bash(pnpm:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(corepack:*)",
+      "Bash(tsc:*)",
+      "Bash(biome:*)",
+      "Bash(astro:*)"
+    ]
+  }
+}
