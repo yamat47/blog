@@ -64,7 +64,7 @@ https://tech.crassone.jp/posts/mvv-award-winning-report
 そういえば全然話は変わりますが、4 月に衝撃的なニュースがありました。
 学生の頃から応援してきたアイドルの子が、今年いっぱいでグループを脱退するとのことです。
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">本日発表させていただきました<br><br>私、柏木ひなたは<br>2022年12月開催予定のライブをもちまして<br>私立恵比寿中学を転校(脱退)いたします<br><br>最後まで応援のほど<br>よろしくお願いいたします<a href="https://twitter.com/hashtag/%E7%A7%81%E7%AB%8B%E6%81%B5%E6%AF%94%E5%AF%BF%E4%B8%AD%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#私立恵比寿中学</a> <a href="https://twitter.com/hashtag/%E3%82%A8%E3%83%93%E4%B8%AD?src=hash&amp;ref_src=twsrc%5Etfw">#エビ中</a> <a href="https://twitter.com/hashtag/%E6%9F%8F%E6%9C%A8%E3%81%B2%E3%81%AA%E3%81%9F?src=hash&amp;ref_src=twsrc%5Etfw">#柏木ひなた</a></p>— 柏木ひなた (@hi_99_na) <a href="https://twitter.com/hi_99_na/status/1510428022440366082">2022年4月3日</a></blockquote>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">本日発表させていただきました<br><br>私、柏木ひなたは<br>2022年12月開催予定のライブをもちまして<br>私立恵比寿中学を転校(脱退)いたします<br><br>最後まで応援のほど<br>よろしくお願いいたします<a href="https://twitter.com/hashtag/%E7%A7%81%E7%AB%8B%E6%81%B5%E6%AF%94%E5%AF%BF%E4%B8%AD%E5%AD%A6?src=hash">#私立恵比寿中学</a> <a href="https://twitter.com/hashtag/%E3%82%A8%E3%83%93%E4%B8%AD?src=hash">#エビ中</a> <a href="https://twitter.com/hashtag/%E6%9F%8F%E6%9C%A8%E3%81%B2%E3%81%AA%E3%81%9F?src=hash">#柏木ひなた</a></p>— 柏木ひなた (@hi_99_na) <a href="https://twitter.com/hi_99_na/status/1510428022440366082">2022年4月3日</a></blockquote>
 
 20 代前半の頃、幾度この子の歌声に救われてきたことか...。
 これまであって当たり前だと思っていたものがなくなってしまうわけで、自分にとってはそこそこ大きな変化になりそうです。

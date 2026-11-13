@@ -93,7 +93,7 @@ slug: "2022/12/31/165912"
 
 <blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">『沈黙のパレード』よかったな… 物語が進展していく感じが小説のページをめくっていくような雰囲気でどんどん引き込まれたし、なによりストーリーがとってもよかった… 福山雅治かっこいい…</p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1581637617984360449">2022年10月16日</a></blockquote>
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">とってもいい映画だった🥲 ネタバレになっちゃうからあんまり書けないけど… すごく重たくてすごく暖かいストーリーでした。こういう話を実家で観てた高校生の頃から10年経って、全然違った感じを抱いてる😢 <a href="https://twitter.com/hashtag/%E3%83%A9%E3%83%BC%E3%82%B2%E3%83%AA%E3%82%88%E3%82%8A%E6%84%9B%E3%82%92%E8%BE%BC%E3%82%81%E3%81%A6?src=hash&amp;ref_src=twsrc%5Etfw">#ラーゲリより愛を込めて</a></p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1602684404044017664">2022年12月13日</a></blockquote>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">とってもいい映画だった🥲 ネタバレになっちゃうからあんまり書けないけど… すごく重たくてすごく暖かいストーリーでした。こういう話を実家で観てた高校生の頃から10年経って、全然違った感じを抱いてる😢 <a href="https://twitter.com/hashtag/%E3%83%A9%E3%83%BC%E3%82%B2%E3%83%AA%E3%82%88%E3%82%8A%E6%84%9B%E3%82%92%E8%BE%BC%E3%82%81%E3%81%A6?src=hash">#ラーゲリより愛を込めて</a></p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1602684404044017664">2022年12月13日</a></blockquote>
 
 ### 『龍が如く』シリーズを初めてプレイした
 
@@ -109,7 +109,7 @@ slug: "2022/12/31/165912"
 
 私立恵比寿中学というグループの柏木ひなたさんというアイドルをずっと推していましたが、今年でグループを脱退しました。大学生の頃からなのでもう 10 年以上応援していたことになりますね、感慨深いです。
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">12年間本当にありがとうございました<br>みんなに出会えてよかったです<br><br>明日からの新・私立恵比寿中学も<br>よろしくお願いいたします<br><br>またね<br><br>出席番号10番 柏木ひなた<a href="https://twitter.com/hashtag/%E6%9F%8F%E6%9C%A8%E3%81%B2%E3%81%AA%E3%81%9F%E5%8D%92%E6%A5%AD%E5%BC%8F?src=hash&amp;ref_src=twsrc%5Etfw">#柏木ひなた卒業式</a> <a href="https://t.co/MTjGy2YORa">pic.twitter.com/MTjGy2YORa</a></p>— 柏木ひなた (@hi_99_na) <a href="https://twitter.com/hi_99_na/status/1603765751122636801">2022年12月16日</a></blockquote>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">12年間本当にありがとうございました<br>みんなに出会えてよかったです<br><br>明日からの新・私立恵比寿中学も<br>よろしくお願いいたします<br><br>またね<br><br>出席番号10番 柏木ひなた<a href="https://twitter.com/hashtag/%E6%9F%8F%E6%9C%A8%E3%81%B2%E3%81%AA%E3%81%9F%E5%8D%92%E6%A5%AD%E5%BC%8F?src=hash">#柏木ひなた卒業式</a> <a href="https://t.co/MTjGy2YORa">pic.twitter.com/MTjGy2YORa</a></p>— 柏木ひなた (@hi_99_na) <a href="https://twitter.com/hi_99_na/status/1603765751122636801">2022年12月16日</a></blockquote>
 
 <blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">本当にありがとう🥹👏🏼<br>スカートの柄とチビひなに感動！！！！ <a href="https://t.co/bdUUl4EcbN">https://t.co/bdUUl4EcbN</a> <a href="https://t.co/AZzllrs86Y">pic.twitter.com/AZzllrs86Y</a></p>— 柏木ひなた (@hi_99_na) <a href="https://twitter.com/hi_99_na/status/1603239395171368960">2022年12月15日</a></blockquote>
 
@@ -117,7 +117,7 @@ slug: "2022/12/31/165912"
 
 引き続きアーティストとして活動し続けるらしいので、今後の活躍に期待してます！
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">推し（の衣装と写真たち）に会ってきた🍤🦐 卒業まであと4ヶ月くらい、最後まで全力で駆け抜けてください…！ <a href="https://twitter.com/hashtag/%E3%82%82%E3%81%A3%E3%81%A8%E3%82%A8%E3%83%93%E5%B1%95?src=hash&amp;ref_src=twsrc%5Etfw">#もっとエビ展</a> <a href="https://t.co/nZONnpZJgH">pic.twitter.com/nZONnpZJgH</a></p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1560902500274044928">2022年8月20日</a></blockquote>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">推し（の衣装と写真たち）に会ってきた🍤🦐 卒業まであと4ヶ月くらい、最後まで全力で駆け抜けてください…！ <a href="https://twitter.com/hashtag/%E3%82%82%E3%81%A3%E3%81%A8%E3%82%A8%E3%83%93%E5%B1%95?src=hash">#もっとエビ展</a> <a href="https://t.co/nZONnpZJgH">pic.twitter.com/nZONnpZJgH</a></p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1560902500274044928">2022年8月20日</a></blockquote>
 
 ## 最後に
 

@@ -38,7 +38,7 @@ https://cocoda.design
 
 スポンサーセッションではあったが、縁あってカンファレンスで 40 分枠で登壇をした。夏頃にあった開発生産性カンファレンスにて、「開発生産性ではなくもっと素朴に事業の生産性を考えよう」というテーマで話した。
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">夏にある「開発生産性カンファレンス」にてお話させていただくことになりました。私のセッションは朝早いですが、皆さまぜひご参加ください！<br><br>「開発生産性」ではなく、事業の投資対効果に向き合う「事業生産性」へ <a href="https://t.co/qtS934ytQe">https://t.co/qtS934ytQe</a> <a href="https://twitter.com/hashtag/%E9%96%8B%E7%99%BA%E7%94%9F%E7%94%A3%E6%80%A7con_findy?src=hash&amp;ref_src=twsrc%5Etfw">#開発生産性con_findy</a></p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1913219843953942560">2025年4月18日</a></blockquote>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">夏にある「開発生産性カンファレンス」にてお話させていただくことになりました。私のセッションは朝早いですが、皆さまぜひご参加ください！<br><br>「開発生産性」ではなく、事業の投資対効果に向き合う「事業生産性」へ <a href="https://t.co/qtS934ytQe">https://t.co/qtS934ytQe</a> <a href="https://twitter.com/hashtag/%E9%96%8B%E7%99%BA%E7%94%9F%E7%94%A3%E6%80%A7con_findy?src=hash">#開発生産性con_findy</a></p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1913219843953942560">2025年4月18日</a></blockquote>
 
 当日の様子はアーカイブが出ていたり、記事にまとめていただいたりもしてありがたい。CfP を他にもいくつか応募したけど通らなかったな、2026年も登壇を狙います。
 
@@ -60,7 +60,7 @@ https://findy-tools.io/articles/onecareer-dev-productivity-con-2025/115
 
 Zero Config にうまく動くツールも増えてきて、世の中に膾炙した 2025 年。来年はまた違ったパラダイムが出てくるだろうのを今から楽しみにしている。
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">結局は Claude Code よ<br><br>-------<br>いつも使っているAIツールをまとめてみました！<br><br> <a href="https://t.co/bXG0ggu0Hr">https://t.co/bXG0ggu0Hr</a><br><br> <a href="https://twitter.com/hashtag/Findy?src=hash&amp;ref_src=twsrc%5Etfw">#Findy</a><br> <a href="https://twitter.com/hashtag/Findy_AI_Career?src=hash&amp;ref_src=twsrc%5Etfw">#Findy_AI_Career</a><br> <a href="https://twitter.com/hashtag/AI%E3%83%84%E3%83%BC%E3%83%AB%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA?src=hash&amp;ref_src=twsrc%5Etfw">#AIツールポートフォリオ</a></p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1991626822765932639">2025年11月20日</a></blockquote>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="ja"><p lang="ja" dir="ltr">結局は Claude Code よ<br><br>-------<br>いつも使っているAIツールをまとめてみました！<br><br> <a href="https://t.co/bXG0ggu0Hr">https://t.co/bXG0ggu0Hr</a><br><br> <a href="https://twitter.com/hashtag/Findy?src=hash">#Findy</a><br> <a href="https://twitter.com/hashtag/Findy_AI_Career?src=hash">#Findy_AI_Career</a><br> <a href="https://twitter.com/hashtag/AI%E3%83%84%E3%83%BC%E3%83%AB%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA?src=hash">#AIツールポートフォリオ</a></p>— 山口 拓弥 (@yamat47) <a href="https://twitter.com/yamat47/status/1991626822765932639">2025年11月20日</a></blockquote>
 
 #### 将来のお金の計画を真剣に考えはじめた
 
