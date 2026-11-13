@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { after, before, describe, it } from "node:test";
 import { pathToFileURL } from "node:url";
 import { createSatteriMarkdownProcessor } from "@astrojs/markdown-satteri";
-import { isRelativeLink, linkedPostPath, postLinks } from "./post-links.ts";
+import { isRelativeLink, linkedPost, postLinks } from "./post-links.ts";
 
 // Three posts on disk: one without a slug, one moved from Hatena Blog, and the one the links are
 // written in.
@@ -50,28 +50,35 @@ describe("isRelativeLink", () => {
   });
 });
 
-describe("linkedPostPath", () => {
-  it("is /entry/<folder> for a post without a slug", () => {
-    assert.equal(linkedPostPath("../new-post/index.md", context), "/entry/new-post");
+describe("linkedPost", () => {
+  it("is at /entry/<folder> for a post without a slug", () => {
+    assert.equal(linkedPost("../new-post/index.md", context).path, "/entry/new-post");
   });
 
-  it("is /entry/<slug> for a post moved from Hatena Blog", () => {
+  it("is at /entry/<slug> for a post moved from Hatena Blog", () => {
     assert.equal(
-      linkedPostPath("../2022-06-02-turning-29/index.md", context),
+      linkedPost("../2022-06-02-turning-29/index.md", context).path,
       "/entry/2022/06/02/002443",
     );
   });
 
+  it("carries the post's frontmatter", () => {
+    assert.deepEqual(linkedPost("../2022-06-02-turning-29/index.md", context).frontmatter, {
+      title: "29歳になりました",
+      slug: "2022/06/02/002443",
+    });
+  });
+
   it("keeps the fragment", () => {
     assert.equal(
-      linkedPostPath("../new-post/index.md#heading", context),
+      linkedPost("../new-post/index.md#heading", context).path,
       "/entry/new-post#heading",
     );
   });
 
   it("fails for a post that does not exist", () => {
     assert.throws(
-      () => linkedPostPath("../no-such-post/index.md", context),
+      () => linkedPost("../no-such-post/index.md", context),
       /linking-post\/index\.md: "\.\.\/no-such-post\/index\.md" leads to a post that does not exist/,
     );
   });
@@ -83,7 +90,7 @@ describe("linkedPostPath", () => {
       "./slides.pdf",
       "../../README.md",
     ]) {
-      assert.throws(() => linkedPostPath(href, context), /does not lead to a post/, href);
+      assert.throws(() => linkedPost(href, context), /does not lead to a post/, href);
     }
   });
 });

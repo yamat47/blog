@@ -1,7 +1,7 @@
 import { defineCollection } from "astro:content";
 import { posix } from "node:path";
 import { glob } from "astro/loaders";
-import { z } from "astro/zod";
+import { postFrontmatter } from "./lib/post-frontmatter.ts";
 import { postId } from "./lib/post-id.ts";
 
 // One folder per post: posts/<name>/index.md with its images beside it. The post's id is the part
@@ -14,13 +14,7 @@ const posts = defineCollection({
     pattern: "*/index.md",
     generateId: ({ entry, data }) => postId(posix.dirname(entry), data),
   }),
-  schema: z.object({
-    title: z.string(),
-    // A quoted string with an offset ("2026-01-01T13:00:22+09:00"). A time without one would be
-    // read as UTC, nine hours off in Japan, and put a late-night post on the next day. Unquoted,
-    // YAML turns it into a Date before this schema can see whether it had an offset.
-    publishedAt: z.iso.datetime({ offset: true }).pipe(z.coerce.date()),
-  }),
+  schema: postFrontmatter,
 });
 
 export const collections = { posts };

@@ -1,26 +1,25 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import type { SatteriProcessorOptions } from "@astrojs/markdown-satteri";
 import { parseFrontmatter } from "astro/markdown";
 import { postId } from "../lib/post-id.ts";
-
-// The plugin type is taken from the processor's options because satteri, which declares it, is
-// not a direct dependency. An entry of the option can also be a function that makes a plugin, and
-// a function has a name too, so those are taken out again.
-type MdastPluginEntry = NonNullable<SatteriProcessorOptions["mdastPlugins"]>[number];
-type MdastPlugin = Exclude<
-  Extract<MdastPluginEntry, { name: string }>,
-  (...args: never[]) => unknown
->;
+import type { MdastPlugin } from "./mdast-plugin.ts";
 
 const HAS_SCHEME = /^[a-z][a-z0-9+.-]*:/i;
 const MARKDOWN_FILE = /\.md(?:[?#]|$)/;
 
-interface LinkContext {
-  /** The Markdown file the link is written in. */
-  from: URL;
+export interface LinkContext {
+  /** The Markdown file the link is written in, when the Markdown comes from a file. */
+  from: URL | undefined;
   /** The folder that holds one folder per post. Ends with a slash. */
   postsDir: URL;
+}
+
+/** A post another post links to. */
+export interface LinkedPost {
+  /** Its URL path, with the fragment the link had. */
+  path: string;
+  /** Its frontmatter as written, not yet checked. */
+  frontmatter: Record<string, unknown>;
 }
 
 /** Whether `href` is resolved against the file it is written in: not a URL, a path from the site's root, or a fragment. */
@@ -29,14 +28,18 @@ export function isRelativeLink(href: string): boolean {
 }
 
 /**
- * The URL path of the post that the relative link `href` points at.
+ * The post that the relative link `href` points at.
  *
  * A post links to another post by its file (../other-post/index.md), so the link works where the
  * Markdown is read as a file, and the target's URL is looked up here instead of being typed.
  * Nothing else a relative link could point at is published, so one that does not lead to a post's
  * file is an error, and so is one that leads to a post that does not exist.
  */
-export function linkedPostPath(href: string, { from, postsDir }: LinkContext): string {
+export function linkedPost(href: string, { from, postsDir }: LinkContext): LinkedPost {
+  if (from === undefined) {
+    throw new Error(`no file to resolve the relative link "${href}" against`);
+  }
+
   const target = new URL(href, from);
   const folder = target.pathname.startsWith(postsDir.pathname)
     ? /^([^/]+)\/index\.md$/.exec(target.pathname.slice(postsDir.pathname.length))?.[1]
@@ -59,8 +62,11 @@ export function linkedPostPath(href: string, { from, postsDir }: LinkContext): s
     throw error;
   }
 
-  const id = postId(decodeURIComponent(folder), parseFrontmatter(source).frontmatter);
-  return `/entry/${id}${target.hash}`;
+  const { frontmatter } = parseFrontmatter(source);
+  return {
+    path: `/entry/${postId(decodeURIComponent(folder), frontmatter)}${target.hash}`,
+    frontmatter,
+  };
 }
 
 /**
@@ -72,34 +78,19 @@ export function linkedPostPath(href: string, { from, postsDir }: LinkContext): s
  * package.json).
  */
 export function postLinks(postsDir: URL): MdastPlugin {
-  const resolve = (href: string, from: URL | undefined): string | undefined => {
-    if (!isRelativeLink(href)) {
-      return undefined;
-    }
-    if (from === undefined) {
-      throw new Error(`post-links: no file to resolve the relative link "${href}" against`);
-    }
-    return linkedPostPath(href, { from, postsDir });
-  };
-
   return {
     name: "post-links",
     link(node, ctx) {
-      const path = resolve(node.url, ctx.fileURL);
-      if (path !== undefined) {
-        ctx.setField(node, "url", path);
+      if (isRelativeLink(node.url)) {
+        ctx.setField(node, "url", linkedPost(node.url, { from: ctx.fileURL, postsDir }).path);
       }
     },
     // The target of a reference-style link: [text][ref] with "[ref]: ../other-post/index.md" below.
     // A definition can just as well be the source of an image (![alt][ref]), and nothing here
     // says which, so only one that names a Markdown file is taken for a link to a post.
     definition(node, ctx) {
-      if (!MARKDOWN_FILE.test(node.url)) {
-        return;
-      }
-      const path = resolve(node.url, ctx.fileURL);
-      if (path !== undefined) {
-        ctx.setField(node, "url", path);
+      if (isRelativeLink(node.url) && MARKDOWN_FILE.test(node.url)) {
+        ctx.setField(node, "url", linkedPost(node.url, { from: ctx.fileURL, postsDir }).path);
       }
     },
   };
