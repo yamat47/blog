@@ -20,7 +20,8 @@ served by GitHub Pages. The blog used to be on Hatena Blog; the posts written th
 | `src/content.config.ts` | The `posts` collection: where the files are and what frontmatter they must have |
 | `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page |
 | `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell, helpers for posts and dates, the site's name and time zone |
-| `src/markdown/` | Plugins for the Markdown processor (Sätteri, configured in `astro.config.ts`), such as the one that resolves links between posts |
+| `src/markdown/` | Plugins for the Markdown processor (Sätteri, configured in `astro.config.ts`): links between posts, link cards |
+| `data/link-cards.json` | What link cards show about the pages posts link to. Written by the build when it fetches a new page, committed, and edited by hand for a page that cannot be fetched |
 | `src/styles/` | `tokens.css` holds every design value; `global.css` uses them |
 | `docker/` | Development image and compose |
 | `Makefile` | Entry point for development commands |
@@ -53,6 +54,8 @@ invokes it with `docker compose -f docker/compose.yaml run`.
 - **Keep dependencies few.** The site was self-hosted once before and went back to Hatena because of upkeep. Prefer a
   small plugin written in this repository to a third-party integration, and make anything that fetches from the network
   at build time cache its result in the repository and fail soft, so that a dead link cannot block a post
+- **Text from another site is never written as HTML.** A link card's title and description come from the linked page.
+  They go into the Markdown tree as text nodes, which the processor escapes; do not build a card from an HTML string
 - TypeScript stays on 6 while `@astrojs/check` does not accept 7 (`.github/dependabot.yml` says when to lift that)
 - Tests run on Node's own test runner (`node --test`, files named `*.test.ts` beside what they test), so a module a
   test loads imports its neighbours with the `.ts` extension. The pages themselves have no tests: they are verified by

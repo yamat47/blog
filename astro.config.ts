@@ -1,6 +1,16 @@
 import { satteri } from "@astrojs/markdown-satteri";
 import { defineConfig } from "astro/config";
+import { createCardStore } from "./src/markdown/card-store.ts";
+import { fetchPage } from "./src/markdown/fetch-page.ts";
+import { linkCards } from "./src/markdown/link-cards.ts";
 import { postLinks } from "./src/markdown/post-links.ts";
+
+const postsDir = new URL("./posts/", import.meta.url);
+const cards = createCardStore({
+  file: new URL("./data/link-cards.json", import.meta.url),
+  fetchPage,
+  warn: (message) => console.warn(message),
+});
 
 export default defineConfig({
   site: "https://blog.yamat47.me",
@@ -17,7 +27,9 @@ export default defineConfig({
       // A post shows what its author typed: "..." stays three dots and quotes stay straight, as
       // they were on Hatena Blog.
       features: { smartPunctuation: false },
-      mdastPlugins: [postLinks(new URL("./posts/", import.meta.url))],
+      // Cards first: a link to a post that stands alone becomes a card, and the links that are
+      // left get their URL from postLinks.
+      mdastPlugins: [linkCards({ postsDir, cards }), postLinks(postsDir)],
     }),
 
     // The highlighter writes var(--astro-code-*) instead of colors of its own, so code blocks take

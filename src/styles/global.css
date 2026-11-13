@@ -99,3 +99,80 @@ a {
   border-inline-start: var(--space-1) solid var(--color-border);
   color: var(--color-ink-muted);
 }
+
+/*
+ * A link shown as a card (src/markdown/link-card.ts): the title, the description and the site in
+ * a column, and the thumbnail at the end when there is one.
+ */
+.link-card {
+  --thumbnail-width: min(var(--card-image-width), var(--card-image-max-share));
+
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  margin-block: var(--space-6);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: inherit;
+  line-height: var(--leading-tight);
+  text-decoration: none;
+}
+
+.link-card:hover {
+  border-color: var(--color-link);
+}
+
+.link-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  /* Lets a long URL shrink the column instead of pushing the thumbnail out of the card. */
+  min-width: 0;
+  padding: var(--space-4);
+}
+
+.link-card-title,
+.link-card-description {
+  display: -webkit-box;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--card-lines);
+  line-clamp: var(--card-lines);
+}
+
+.link-card-title {
+  font-weight: var(--weight-bold);
+}
+
+.link-card-description,
+.link-card-site {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.link-card-site {
+  margin-top: auto;
+}
+
+/*
+ * The thumbnail fills the end of the card from top to bottom, cropped to fit, so the text decides
+ * how tall a card is and a square image does not make one twice the height of the next. An image
+ * that fails to load removes itself (link-card.ts), and these two rules stop applying with it.
+ */
+.link-card:has(.link-card-image) {
+  min-height: var(--card-image-min-height);
+  padding-inline-end: var(--thumbnail-width);
+}
+
+/* The selector outranks `.prose img`, which would size the thumbnail by its own proportions. */
+.prose .link-card-image {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: var(--thumbnail-width);
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+}

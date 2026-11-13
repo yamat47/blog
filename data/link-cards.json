@@ -1,0 +1,84 @@
+{
+  "https://cocoda.design": {
+    "title": "Cocoda",
+    "description": "Cocodaは、デザインの裏側をまとめた事例集です。日本を代表するデザイン組織から、500以上の事例が公開されています。",
+    "image": "https://cocoda.design/lp/og-image-500-design-behinds.png",
+    "site": "Cocoda"
+  },
+  "https://findy-tools.io/articles/onecareer-dev-productivity-con-2025/115": {
+    "title": "【開発生産性カンファレンス 2025】「開発生産性」ではなく、 事業の投資対効果に向き合う「事業生産性」へ - Findy Tools",
+    "description": "開発生産性カンファレンス 2025・株式会社ワンキャリアのレポート",
+    "image": "https://findy-tools.io/public_images/article/2025_dpc/onecareer/image1.jpg"
+  },
+  "https://judgment.sega.com/": {
+    "title": "LOST JUDGMENT 裁かれざる記憶 | SEGA Official Website",
+    "description": "PlayStation®5 / PlayStation®4 / Xbox One / Xbox Series X|S / Steam 『LOST JUDGMENT 裁かれざる記憶』公式サイト",
+    "image": "https://judgment.sega.com/fb-img.jpg",
+    "site": "LOST JUDGMENT 裁かれざる記憶 | SEGA Official Website"
+  },
+  "https://nikkie-ftnext.hatenablog.com/entry/how-to-split-user-stories-not-split-into-tasks-202305": {
+    "title": "ユーザストーリーをタスクに分解しないための考え方をさがして - nikkie-ftnextの日記",
+    "description": "はじめに 親父...1 nikkieです。 ユーザストーリーの分割について、いくつかの書籍に渡ったつながりを発見しました！ 現時点のバックアップとしてアウトプットします。 目次 はじめに 目次 ユーザストーリーとは 『アジャイルな見積りと計画づくり』 12章 ユーザーストーリーの分割 『達人プログラマー』 （第2版） 12 曳光弾 曳光弾（『アジャイルな見積りと計画づくり』）と、縦スライス（『アート・オブ・アジャイル デベロップメント』） 終わりに（考え方を練習するんだ！） ユーザストーリーとは ユーザーストーリーという表記が一般的な気がしますが、このエントリではユーザストーリー表記で行きま…",
+    "image": "https://cdn.image.st-hatena.com/image/scale/74c6c1142d3e61cfb4f40607e54d546cf3147d62/backend=imagemagick;version=1;width=1300/https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F51A6GGDWeaL._SL500_.jpg",
+    "site": "nikkie-ftnextの日記"
+  },
+  "https://ryu-ga-gotoku.com/eight/": {
+    "title": "『龍が如く８』 公式サイト｜SEGA",
+    "description": "『龍が如く８』公式サイト",
+    "image": "https://ryu-ga-gotoku.com/eight/ogp.png",
+    "site": "『龍が如く８』 公式サイト｜SEGA"
+  },
+  "https://ryu-ga-gotoku.com/gaiden/": {
+    "title": "『龍が如く７外伝 名を消した男』 公式サイト｜SEGA",
+    "description": "『龍が如く７外伝 名を消した男』公式サイト",
+    "image": "https://ryu-ga-gotoku.com/gaiden/ogp.jpg",
+    "site": "『龍が如く７外伝 名を消した男』 公式サイト｜SEGA"
+  },
+  "https://ryu-ga-gotoku.com/pirate/": {
+    "title": "『龍が如く８外伝 Pirates in Hawaii』 公式サイト｜SEGA",
+    "description": "『龍が如く８外伝 Pirates in Hawaii』 公式サイト",
+    "image": "https://ryu-ga-gotoku.com/pirate/ogp.png",
+    "site": "『龍が如く８外伝 Pirates in Hawaii』 公式サイト｜SEGA"
+  },
+  "https://ryu-ga-gotoku.com/seven/": {
+    "title": "龍が如く7 光と闇の行方(PlayStation®4) | セガ公式サイト",
+    "description": "PS4®専用ソフト『龍が如く7 光と闇の行方』(2020年1月16日発売)の公式サイトです。",
+    "image": "https://ryu-ga-gotoku.com/seven/fb-img.jpg",
+    "site": "龍が如く7 光と闇の行方(PlayStation®4) | セガ公式サイト"
+  },
+  "https://scrapbox.io/iki-iki/%E3%83%A6%E3%83%8B%E3%82%B3%E3%83%BC%E3%83%B3%E4%BC%81%E6%A5%AD%E3%81%AE%E3%81%B2%E3%81%BF%E3%81%A4%2F%E8%A8%B3%E8%80%85%E3%81%82%E3%81%A8%E3%81%8C%E3%81%8D": {
+    "title": "ユニコーン企業のひみつ/訳者あとがき - iki-iki",
+    "description": "この「訳者あとがき」のライセンスはクリエイティブ・コモンズの表示-非営利- 継承 https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.jaです。この「訳者あとがき」は「角谷信太郎と島田 浩二」によって変更されています。変更前の原著作者は「オライリー・ジャパン」です。このページの内容はこのクリエイティブ・コモンズライセンスの範囲内に",
+    "image": "https://gyazo.com/d6453a455cb93da90d05c7e64369f7ce/max_size/2000",
+    "site": "iki-iki"
+  },
+  "https://tech.crassone.jp/posts/mvv-award-winning-report": {
+    "title": "「当たり前」のことをしつづけたら四半期のMVPに選ばれた話 | クラッソーネ開発者ブログ"
+  },
+  "https://tech.hey.jp/entry/2020/11/30/110853": {
+    "title": "STORESを支える「運用週」という仕組み - STORES Product Blog",
+    "description": "みなさんは「保守・運用」と聞くとどのようなイメージをお持ちでしょうか？ もしかしたら良いイメージをお持ちでない方もいらっしゃるかもしれません。 しかし、売り上げを生み出している既存コードの保守運用はビジネス上、新規機能開発と同等かそれ以上に重要な存在です。 保守運用は歴史あるサービスでは欠かせない作業ですが、STORESもその例外ではありません。 STORESの最初のコードが書かれてから、8年の歳月が経ちました。 今となってはコードの量も多く、今年(2020年)の8月に入社した私(@zakky)も全体を把握しきれてはいません。 STORESにジョインした最初の1ヶ月間、「商品の在庫数を一括で…",
+    "image": "https://cdn.image.st-hatena.com/image/scale/3ed8e88f783bad7f5d8eadf41e7975d8131b31cd/backend=imagemagick;version=1;width=1300/https%3A%2F%2Fcdn-ak.f.st-hatena.com%2Fimages%2Ffotolife%2Fd%2Fdimn_zkym%2F20201127%2F20201127093802.png",
+    "site": "STORES Product Blog"
+  },
+  "https://www.nicovideo.jp/user/12906136/mylist/24818058": {
+    "title": "牛沢 - ニコニコ",
+    "description": "牛沢さんのユーザーページです。実況プレイとかの人。",
+    "image": "https://img.nicoprofile.nimg.jp/usericon/1290/12906136.jpg?1364892856",
+    "site": "ニコニコ"
+  },
+  "https://www.oreilly.co.jp/books/9784873119397/": {
+    "title": "スクラム実践者が知るべき97のこと",
+    "description": "アジャイル開発手法のなかで最もよく使われる手法の1つがスクラムだ。スクラムは、複雑な問題に取り組むためのシンプルなフレームワークであり、シンプルであるがゆえに実践には要所を押さえるスキルが必要になる。 本書は、世界中で活躍するスクラム専門家が自らの経験と知見に基づいて執筆したエッセイ集である。スクラム適用の戦略、スクラムで進める上での戦術やパターン、さまざまな職種のコラボレーション、組織への影響などについて幅広い視点で紹介する。 日本語版では、及部 敬雄、小林 恭平（kyon_mm）、高橋 一貴、長沢 智治、平鍋 健児、安井 力（やっとむ）、和田 卓人、永瀬 美穂、原田 騎郎、吉羽 龍太郎に…",
+    "image": "https://www.oreilly.co.jp/books/images/picture_large978-4-87311-939-7.jpeg"
+  },
+  "https://www.sega.jp/topics/detail/210707_2/": {
+    "title": "『LOST JUDGMENT：裁かれざる記憶』主題歌「蝸旋」を発表｜セガ SEGA"
+  },
+  "https://www.youtube.com/@uszw/playlists": {
+    "title": "牛沢",
+    "description": "好きなゲームの実況をしてるだけのチャンネル。 【X(旧Twitter)】http://twitter.com/ushizawa",
+    "image": "https://yt3.googleusercontent.com/cgd73ZPow1fRbhFwG2PAPbtf4Wo6a6efni0N6kPeRoOn7Vp4Yn8wJpeaOr9tTLZXay9QlwNs=s900-c-k-c0x00ffffff-no-rj",
+    "site": "YouTube"
+  }
+}
