@@ -1,6 +1,7 @@
 # Development image. Node and pnpm are not installed on the host; the whole toolchain runs in here.
 # The Node major matches .node-version at the repository root (which CI reads).
-# Dependabot bumps only this file, so in that PR, also update .node-version to the same version.
+# Dependabot bumps only this file, so in that PR, also update .node-version to the same version
+# and, when the major changes, the major of @types/node in package.json.
 # The build context is the repository root (docker/compose.yaml).
 FROM node:26-trixie-slim
 

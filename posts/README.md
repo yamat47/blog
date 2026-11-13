@@ -10,8 +10,8 @@ posts/
 ```
 
 The folder name is the last part of the post's URL: `posts/looking-back-2026/` is published at
-`/entry/looking-back-2026`. Name it in lowercase with hyphens; anything else is rewritten into that
-form for the URL. Changing it after publishing breaks every link to the post.
+`/entry/looking-back-2026`. Name it with lowercase letters, digits and hyphens; the build rejects
+anything else. Changing it after publishing breaks every link to the post.
 
 The folders that start with a date (`2022-11-11-leaving-crassone`) are the posts moved from Hatena
 Blog. Their URL comes from `slug` (below), so the name is only for finding them. A new post has no

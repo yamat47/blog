@@ -37,10 +37,16 @@ updates:
           - minor
           - patch
     ignore:
-      # The one exception to following majors: @astrojs/check accepts TypeScript 5 and 6 only
+      # An exception to following majors: @astrojs/check accepts TypeScript 5 and 6 only
       # (its peerDependencies), and `astro check` is the typecheck. Remove this entry when a
       # release of @astrojs/check accepts TypeScript 7.
       - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
+      # Its major is the major of Node, so it is raised by hand in the pull request that bumps
+      # Node (the docker entry below; docker/Dockerfile lists what else changes there). Types for
+      # a newer Node would let code use what the runtime does not have.
+      - dependency-name: "@types/node"
         update-types:
           - version-update:semver-major
 

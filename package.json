@@ -15,7 +15,8 @@
     "typecheck": "astro check",
     "lint": "biome check --error-on-warnings .",
     "lint:fix": "biome check --write .",
-    "check": "pnpm run typecheck && pnpm run lint && pnpm run build"
+    "test": "node --test \"src/**/*.test.ts\"",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run build"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.9",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@biomejs/biome": "^2.6.7",
+    "@types/node": "^26.6.6",
     "typescript": "~6.0.3"
   },
   "packageManager": "pnpm@11.8.0"

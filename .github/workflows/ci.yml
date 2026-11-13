@@ -43,6 +43,9 @@ jobs:
       - name: Lint (Biome)
         run: pnpm run lint
 
+      - name: Test (node --test)
+        run: pnpm run test
+
       - name: Build (Astro)
         run: pnpm run build
 

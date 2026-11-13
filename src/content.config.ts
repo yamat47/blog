@@ -1,13 +1,19 @@
 import { defineCollection } from "astro:content";
+import { posix } from "node:path";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { postId } from "./lib/post-id.ts";
 
-// One folder per post: posts/<name>/index.md with its images beside it. The folder name is the
-// post's id and the last part of its URL (/entry/<name>). A post moved from Hatena Blog sets
-// `slug` in its frontmatter to its old path (2026/01/01/130022), which the loader takes as the id
-// instead, so the folder can have a readable name and the URL stays what it was.
+// One folder per post: posts/<name>/index.md with its images beside it. The post's id is the part
+// of its URL after /entry/: the folder name, or the `slug` a post moved from Hatena Blog sets to
+// its old path (2026/01/01/130022), so the folder can have a readable name and the URL stays what
+// it was. postId decides it here and for the links between posts alike.
 const posts = defineCollection({
-  loader: glob({ base: "./posts", pattern: "*/index.md" }),
+  loader: glob({
+    base: "./posts",
+    pattern: "*/index.md",
+    generateId: ({ entry, data }) => postId(posix.dirname(entry), data),
+  }),
   schema: z.object({
     title: z.string(),
     // A quoted string with an offset ("2026-01-01T13:00:22+09:00"). A time without one would be
