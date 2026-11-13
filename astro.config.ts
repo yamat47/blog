@@ -1,3 +1,4 @@
+import { satteri } from "@astrojs/markdown-satteri";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
@@ -10,7 +11,13 @@ export default defineConfig({
   trailingSlash: "never",
   build: { format: "file" },
 
-  // The highlighter writes var(--astro-code-*) instead of colors of its own, so code blocks take
-  // theirs from src/styles/tokens.css like everything else.
-  markdown: { shikiConfig: { theme: "css-variables" } },
+  markdown: {
+    // A post shows what its author typed: "..." stays three dots and quotes stay straight, as
+    // they were on Hatena Blog.
+    processor: satteri({ features: { smartPunctuation: false } }),
+
+    // The highlighter writes var(--astro-code-*) instead of colors of its own, so code blocks take
+    // theirs from src/styles/tokens.css like everything else.
+    shikiConfig: { theme: "css-variables" },
+  },
 });
