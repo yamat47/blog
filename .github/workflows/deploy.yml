@@ -1,0 +1,79 @@
+# Builds the site and publishes it to GitHub Pages (https://blog.yamat47.me/).
+name: Deploy
+
+on:
+  # Run by hand only, for now. blog.yamat47.me still resolves to Hatena Blog, and until the domain
+  # moves the Pages site would sit under yamat47.github.io/blog/, a sub-path the root-relative
+  # links of this site do not work under. `push` to main is added when the domain moves.
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  # Astro reports anonymous usage data unless told not to
+  ASTRO_TELEMETRY_DISABLED: "1"
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read # checkout
+    steps:
+      - name: Checkout
+        uses: yamat47/github-toolkit/actions/checkout@main
+        with:
+          persist-credentials: false
+
+      # No pnpm store cache here, unlike ci.yml: a cache entry is shared across branches, and
+      # what this job builds is published.
+      - name: Setup pnpm
+        # The version is read from packageManager in package.json.
+        uses: yamat47/github-toolkit/actions/setup-pnpm@main
+
+      - name: Setup Node.js
+        uses: yamat47/github-toolkit/actions/setup-node@main
+        with:
+          node-version-file: .node-version
+          package-manager-cache: "false"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # CI runs in parallel with this workflow, so the check that decides whether the site works
+      # is repeated here before anything is published.
+      - name: Typecheck (astro check)
+        run: pnpm run typecheck
+
+      - name: Build (Astro)
+        run: pnpm run build
+
+      - name: Upload the site
+        uses: yamat47/github-toolkit/actions/upload-pages-artifact@main
+        with:
+          path: dist
+
+  deploy:
+    name: deploy to GitHub Pages
+    # A dispatch from another branch builds it but does not publish it. Posts in progress live
+    # on branches.
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    # Only publishing is serialized, so a build from another branch never cancels a queued
+    # deploy. A deploy runs to the end; the next one waits for it.
+    concurrency:
+      group: ${{ github.workflow }}-deploy
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write # deploy-pages creates the deployment
+      id-token: write # deploy-pages proves the artifact came from this workflow
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        name: Deploy
+        uses: yamat47/github-toolkit/actions/deploy-pages@main

@@ -1,0 +1,7 @@
+# github-toolkit is referenced at @main rather than pinned by SHA; the reason is in ci.yml.
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        "yamat47/github-toolkit/*": ref-pin
+        "*": hash-pin

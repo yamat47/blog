@@ -1,0 +1,27 @@
+# The skills in .claude/skills/ are installed from github-toolkit with gh skill install.
+# Just as Dependabot bumps package.json, when a new toolkit release comes out, run
+# gh skill update --all and put the changes into a single PR.
+# The body is github-toolkit's reusable workflow ("Reusable workflows" in the toolkit README).
+# How to read the PR is in the review-skill-update skill.
+#
+# CI does not run on a PR opened with github.token (GitHub's behavior). Skills do not change code,
+# so leave it as is; when CI is needed, pass a GitHub App token via secrets.token.
+name: Update skills
+
+on:
+  schedule:
+    # Monday morning (9:00 JST). Toolkit releases often come out on weekends
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  update:
+    permissions:
+      contents: write # required to push the update branch
+      pull-requests: write # required to open the pull request
+    uses: yamat47/github-toolkit/.github/workflows/update-skills.yml@main
+    with:
+      commit-message: "chore(claude): update the github-toolkit skills"
+      pr-title: "chore(claude): update the github-toolkit skills"
