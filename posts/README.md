@@ -10,14 +10,21 @@ posts/
 ```
 
 The folder name is the last part of the post's URL: `posts/looking-back-2026/` is published at
-`/entry/looking-back-2026`. Name it in lowercase with hyphens; anything else is rewritten into that
-form for the URL. Changing it after publishing breaks every link to the post.
+`/entry/looking-back-2026`. Name it with lowercase letters, digits and hyphens; the build rejects
+anything else. Changing it after publishing breaks every link to the post.
 
 The folders that start with a date (`2022-11-11-leaving-crassone`) are the posts moved from Hatena
 Blog. Their URL comes from `slug` (below), so the name is only for finding them. A new post has no
 date in its folder name, because the name is its URL.
 
 To link to another post, link to its file: `[クラッソーネを退職しました](../2022-11-11-leaving-crassone/index.md)`.
+The build turns that into the post's URL and fails when there is no such post. A relative link to
+anything else fails too, since nothing else beside a post is published except its images. This
+covers links written in Markdown; a link inside raw HTML is left as it is.
+
+The dev server checks a post's links when that post is saved. It reports a bad one in its log
+(`make logs`) and keeps showing the post as it was, and it does not notice a post renamed
+elsewhere. `make check` catches both.
 
 ## Frontmatter
 

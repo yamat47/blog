@@ -20,6 +20,7 @@ served by GitHub Pages. The blog used to be on Hatena Blog; the posts written th
 | `src/content.config.ts` | The `posts` collection: where the files are and what frontmatter they must have |
 | `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page |
 | `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell, helpers for posts and dates, the site's name and time zone |
+| `src/markdown/` | Plugins for the Markdown processor (Sätteri, configured in `astro.config.ts`), such as the one that resolves links between posts |
 | `src/styles/` | `tokens.css` holds every design value; `global.css` uses them |
 | `docker/` | Development image and compose |
 | `Makefile` | Entry point for development commands |
@@ -32,8 +33,8 @@ invokes it with `docker compose -f docker/compose.yaml run`.
 
 | Goal | Command |
 |---|---|
-| Typecheck, lint and build in one go | `make check` (CI runs the same, plus zizmor on the workflows) |
-| Type check / lint / auto-fix | `make typecheck` / `make lint` / `make fix` |
+| Typecheck, lint, test and build in one go | `make check` (CI runs the same, plus zizmor on the workflows) |
+| Type check / lint / auto-fix / test | `make typecheck` / `make lint` / `make fix` / `make test` |
 | Build the site | `make build` (`dist/`) |
 | Dev server | `make up` (http://localhost:4321) / `make logs` / `make down` |
 | Add or update dependencies | `make pnpm ARGS="add -D <pkg>"` (the lockfile is also updated on the host) |
@@ -53,7 +54,9 @@ invokes it with `docker compose -f docker/compose.yaml run`.
   small plugin written in this repository to a third-party integration, and make anything that fetches from the network
   at build time cache its result in the repository and fail soft, so that a dead link cannot block a post
 - TypeScript stays on 6 while `@astrojs/check` does not accept 7 (`.github/dependabot.yml` says when to lift that)
-- The site has no test runner yet. It is verified by `make check` and a look at the page (`make up`)
+- Tests run on Node's own test runner (`node --test`, files named `*.test.ts` beside what they test), so a module a
+  test loads imports its neighbours with the `.ts` extension. The pages themselves have no tests: they are verified by
+  `make check` and a look at the page (`make up`)
 
 ## Deploying
 

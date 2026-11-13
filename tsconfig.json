@@ -1,5 +1,10 @@
 {
   "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    // TypeScript 6 loads no @types package unless it is named here. The Markdown plugins and the
+    // tests use Node's own modules (node:fs, node:test).
+    "types": ["node"]
+  },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
 }

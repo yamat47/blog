@@ -62,8 +62,12 @@ lint: ## Check with Biome
 fix: ## Auto-fix with Biome
 	$(PNPM) run lint:fix
 
+.PHONY: test
+test: ## Run the unit tests (node --test)
+	$(PNPM) run test
+
 .PHONY: check
-check: ## Typecheck, lint and build (what CI runs, minus zizmor)
+check: ## Typecheck, lint, test and build (what CI runs, minus zizmor)
 	$(PNPM) run check
 
 .PHONY: pnpm
