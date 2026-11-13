@@ -1,5 +1,6 @@
 import { satteri } from "@astrojs/markdown-satteri";
 import { defineConfig } from "astro/config";
+import { postLinks } from "./src/markdown/post-links.ts";
 
 export default defineConfig({
   site: "https://blog.yamat47.me",
@@ -12,13 +13,12 @@ export default defineConfig({
   build: { format: "file" },
 
   markdown: {
-    // A post shows what its author typed: "..." stays three dots and quotes stay straight, as
-    // they were on Hatena Blog.
-    processor: satteri({ features: { smartPunctuation: false } }),
-
-    // TODO: rewrite a link to another post's file (../<folder>/index.md) into its URL
-    // (/entry/<id>) and fail the build when the target is missing. Until then those links are
-    // emitted as written and do not resolve, so this comes before the deploy runs on push.
+    processor: satteri({
+      // A post shows what its author typed: "..." stays three dots and quotes stay straight, as
+      // they were on Hatena Blog.
+      features: { smartPunctuation: false },
+      mdastPlugins: [postLinks(new URL("./posts/", import.meta.url))],
+    }),
 
     // The highlighter writes var(--astro-code-*) instead of colors of its own, so code blocks take
     // theirs from src/styles/tokens.css like everything else.

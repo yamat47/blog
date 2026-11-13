@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --host",
-    "build": "astro build",
+    "build": "astro build --force",
     "preview": "astro preview --host",
     "typecheck": "astro check",
     "lint": "biome check --error-on-warnings .",

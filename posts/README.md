@@ -18,6 +18,10 @@ Blog. Their URL comes from `slug` (below), so the name is only for finding them.
 date in its folder name, because the name is its URL.
 
 To link to another post, link to its file: `[クラッソーネを退職しました](../2022-11-11-leaving-crassone/index.md)`.
+The build turns that into the post's URL and fails when there is no such post. A relative link to
+anything else fails too, since nothing else beside a post is published except its images. This
+covers links written in Markdown; a link inside raw HTML is left as it is. The dev server checks a
+post's links when that post is saved, so a post renamed elsewhere shows up in `make check`.
 
 ## Frontmatter
 

@@ -20,6 +20,7 @@ served by GitHub Pages. The blog used to be on Hatena Blog; the posts written th
 | `src/content.config.ts` | The `posts` collection: where the files are and what frontmatter they must have |
 | `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page |
 | `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell, helpers for posts and dates, the site's name and time zone |
+| `src/markdown/` | Plugins for the Markdown processor (Sätteri, configured in `astro.config.ts`), such as the one that resolves links between posts |
 | `src/styles/` | `tokens.css` holds every design value; `global.css` uses them |
 | `docker/` | Development image and compose |
 | `Makefile` | Entry point for development commands |
