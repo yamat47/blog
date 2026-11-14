@@ -46,4 +46,14 @@
 
   /* Width of a line of body text. */
   --measure: 42rem;
+
+  /*
+   * A link card: the width of its thumbnail and the most of the card's width it may take (on a
+   * phone the full width would leave the text a few characters a line), the least height of a
+   * card that has one, and the lines of text shown before cutting.
+   */
+  --card-image-width: 11rem;
+  --card-image-max-share: 35%;
+  --card-image-min-height: 6rem;
+  --card-lines: 2;
 }

@@ -49,6 +49,14 @@ jobs:
       - name: Build (Astro)
         run: pnpm run build
 
+      # The steps above fetch any page a post links to that data/link-cards.json does not have
+      # yet, and write it there. A difference means the post was pushed without that file, and
+      # every deploy would fetch the page again and could show a different card each time. Run
+      # `make check` and commit the file. A page that cannot be fetched writes nothing, so it
+      # does not fail here.
+      - name: Link card data is committed
+        run: git diff --exit-code -- data/link-cards.json
+
   # Checks how the workflows are written. zizmor finds missing permissions, script injection,
   # actions not pinned by SHA, and so on.
   lint-workflows:

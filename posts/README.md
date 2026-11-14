@@ -17,15 +17,6 @@ The folders that start with a date (`2022-11-11-leaving-crassone`) are the posts
 Blog. Their URL comes from `slug` (below), so the name is only for finding them. A new post has no
 date in its folder name, because the name is its URL.
 
-To link to another post, link to its file: `[クラッソーネを退職しました](../2022-11-11-leaving-crassone/index.md)`.
-The build turns that into the post's URL and fails when there is no such post. A relative link to
-anything else fails too, since nothing else beside a post is published except its images. This
-covers links written in Markdown; a link inside raw HTML is left as it is.
-
-The dev server checks a post's links when that post is saved. It reports a bad one in its log
-(`make logs`) and keeps showing the post as it was, and it does not notice a post renamed
-elsewhere. `make check` catches both.
-
 ## Frontmatter
 
 ```yaml
@@ -40,6 +31,46 @@ publishedAt: "2026-12-31T17:48:53+09:00"
 | `title` | yes | The post's title |
 | `publishedAt` | yes | When it was published, in quotes and with the `+09:00` offset. The build rejects a time without an offset, which would be read as UTC and could land on the wrong day |
 | `slug` | no | Only for posts moved from Hatena Blog: the old path under `/entry/`, such as `2026/01/01/130022`. It replaces the folder name in the URL, so the folder can have a readable name |
+
+## Links to other posts
+
+To link to another post, link to its file: `[クラッソーネを退職しました](../2022-11-11-leaving-crassone/index.md)`.
+The build turns that into the post's URL and fails when there is no such post. A relative link to
+anything else fails too, since nothing else beside a post is published except its images. This
+covers links written in Markdown; a link inside raw HTML is left as it is.
+
+The dev server checks a post's links when that post is saved. It reports a bad one in its log
+(`make logs`) and keeps showing the post as it was, and it does not notice a post renamed
+elsewhere. `make check` catches both.
+
+## Link cards
+
+A link alone in its paragraph, with a blank line before and after it, becomes a card:
+
+```markdown
+https://example.com/some/page
+
+[クラッソーネを退職しました](../2022-11-11-leaving-crassone/index.md)
+```
+
+- A bare URL becomes a card with the page's title, description, site name and thumbnail. A link
+  with words of its own (`[the guide](https://example.com/guide)`) stays a link, and so does a URL
+  inside a sentence, a list or a quote, or on a line right under another URL.
+- A link to another post becomes a card with that post's title and date.
+
+The first build after a URL is added (`make check`, or the dev server) fetches the page and writes
+what it found to `data/link-cards.json`. Commit that file with the post: from then on the card is
+built from it, without the network, and stays the same when the page changes or disappears. CI
+fails a pull request whose build still had a page to fetch.
+
+A page that cannot be fetched still gets a card, showing its URL, and the build goes on. Some
+sites refuse programs and some are gone; for those, add the entry to `data/link-cards.json` by
+hand (only `title` is required). To fetch a page again, delete its entry.
+
+The thumbnail is loaded from the other site when a reader opens the post. One that no longer
+exists is dropped, and the card is shown without it.
+
+## Drafts
 
 A post in progress stays on its branch as a draft pull request, and merging it into `main` is what
 publishes it (once the deploy workflow runs on `main`; see the repository README).

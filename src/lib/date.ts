@@ -1,4 +1,4 @@
-import { SITE } from "../site";
+import { SITE } from "../site.ts";
 
 // sv-SE formats a date as YYYY-MM-DD, which is how the blog has always shown dates.
 const dayFormat = new Intl.DateTimeFormat("sv-SE", { timeZone: SITE.timeZone });
