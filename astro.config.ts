@@ -4,6 +4,7 @@ import { createCardStore } from "./src/markdown/card-store.ts";
 import { fetchPage } from "./src/markdown/fetch-page.ts";
 import { linkCards } from "./src/markdown/link-cards.ts";
 import { postLinks } from "./src/markdown/post-links.ts";
+import { SITE } from "./src/site.ts";
 
 const postsDir = new URL("./posts/", import.meta.url);
 const cards = createCardStore({
@@ -13,7 +14,7 @@ const cards = createCardStore({
 });
 
 export default defineConfig({
-  site: "https://blog.yamat47.me",
+  site: SITE.url,
 
   // The posts written on Hatena Blog keep their URLs, which have no trailing slash
   // (/entry/2026/01/01/130022). Built as entry/2026/01/01/130022.html, GitHub Pages serves a post

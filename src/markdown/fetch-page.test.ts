@@ -35,6 +35,10 @@ describe("fetchPage", () => {
           response.writeHead(200, { "content-type": "image/png" });
           response.end("PNG");
           break;
+        case "/user-agent":
+          response.writeHead(200, { "content-type": "text/html" });
+          response.end(request.headers["user-agent"]);
+          break;
         case "/untyped":
           response.writeHead(200);
           response.end("<title>種類なし</title>");
@@ -62,6 +66,13 @@ describe("fetchPage", () => {
       html: "<title>ページ</title>",
       url: `${origin}/page`,
     });
+  });
+
+  it("says whose program it is", async () => {
+    assert.equal(
+      (await fetchPage(`${origin}/user-agent`)).html,
+      "Mozilla/5.0 (compatible; link-card/1.0; +https://blog.yamat47.me/)",
+    );
   });
 
   it("returns the URL the page was found at after a redirect", async () => {

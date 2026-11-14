@@ -1,3 +1,4 @@
+import { SITE } from "../site.ts";
 import { decodePage } from "./page-metadata.ts";
 
 /** A page as fetched: its text, and its URL after any redirect. */
@@ -37,8 +38,10 @@ async function readStart(response: Response, limit: number): Promise<Uint8Array>
 export async function fetchPage(url: string): Promise<FetchedPage> {
   const response = await fetch(url, {
     headers: {
-      // Some sites answer a client without a browser-like name with an error page.
-      "user-agent": "Mozilla/5.0 (compatible; link-card/1.0)",
+      // Some sites answer a client without a browser-like name with an error page. The address
+      // is the usual way for a program to say whose it is, so a site's operator who sees these
+      // requests can find out what they are for.
+      "user-agent": `Mozilla/5.0 (compatible; link-card/1.0; +${SITE.url}/)`,
       accept: "text/html,application/xhtml+xml",
       "accept-language": "ja,en;q=0.8",
     },
