@@ -90,6 +90,15 @@ class="twitter-tweet">` part; leave out the `<script>` line that follows it). A 
 loads X's script, which turns the quote into the tweet as X shows it. Where the script does not
 run, or once the tweet is deleted, the quote stays: the text, the author and a link.
 
+## What a shared link shows
+
+Where a link to a post is shared (X, Slack and so on), it shows a card and a few lines of text.
+Both are made by the build; a post sets neither.
+
+- The card is an image of the post's title over the site's name. A long title is drawn smaller
+  so that it fits. The card's font has no emoji, so one in a title is drawn as a small box there.
+- The text is the start of the post, without its headings, code blocks and link cards.
+
 ## Drafts
 
 A post in progress stays on its branch as a draft pull request, and merging it into `main` is what

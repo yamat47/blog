@@ -2,7 +2,8 @@
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { formatDay } from "../../lib/date";
-import { getPosts, type Post, postPath } from "../../lib/posts";
+import { excerpt } from "../../lib/excerpt";
+import { getPosts, ogCardPath, type Post, postPath } from "../../lib/posts";
 import { hasTweet } from "../../lib/tweets";
 
 // A rest parameter, because the id of a post moved from Hatena Blog has slashes in it
@@ -16,12 +17,22 @@ interface Props {
   post: Post;
 }
 
+// How much of a post's start a search result or a shared link shows before cutting it itself.
+const DESCRIPTION_LENGTH = 120;
+
 const { post } = Astro.props;
 const { Content } = await render(post);
-const hasTweets = hasTweet(post.rendered?.html ?? "");
+const html = post.rendered?.html ?? "";
+const hasTweets = hasTweet(html);
 ---
 
-<Base title={post.data.title} path={postPath(post)}>
+<Base
+  title={post.data.title}
+  path={postPath(post)}
+  description={excerpt(html, DESCRIPTION_LENGTH)}
+  type="article"
+  ogCardPath={ogCardPath(post)}
+>
   {
     // Asks X not to use the visit for tailoring what the reader is shown there.
     hasTweets && <meta slot="head" name="twitter:dnt" content="on" />

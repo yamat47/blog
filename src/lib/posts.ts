@@ -12,3 +12,8 @@ export async function getPosts(): Promise<Post[]> {
 export function postPath(post: Post): string {
   return `/entry/${post.id}`;
 }
+
+/** The URL path of the card a shared link to the post shows (`src/pages/og/`). */
+export function ogCardPath(post: Post): string {
+  return `/og/${post.id}.png`;
+}

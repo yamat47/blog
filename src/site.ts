@@ -5,6 +5,8 @@ export const SITE = {
   url: "https://blog.yamat47.me",
   // Where the feed is published. Pages point feed readers here.
   feedPath: "/feed.xml",
+  // The card a shared link shows for a page without one of its own.
+  ogCardPath: "/og.png",
   lang: "ja",
   // Dates are shown as the day they had in Japan, wherever the build runs.
   timeZone: "Asia/Tokyo",
