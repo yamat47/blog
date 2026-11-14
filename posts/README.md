@@ -70,6 +70,26 @@ hand (only `title` is required). To fetch a page again, delete its entry.
 The thumbnail is loaded from the other site when a reader opens the post. One that no longer
 exists is dropped, and the card is shown without it.
 
+## Images and captions
+
+Put an image in the post's folder and link to it by its file name: `![花束の写真](./flowers.jpg)`.
+The words in the brackets are for a reader who cannot see the image.
+
+To show a caption under an image, give it a title, and leave the image alone in its paragraph:
+
+```markdown
+![花束の写真](./flowers.jpg "最終日に花束をいただきました")
+```
+
+An image inside a sentence gets no caption; there its title stays a tooltip.
+
+## Tweets
+
+To show a tweet, paste the HTML that X gives under "Embed post" (the `<blockquote
+class="twitter-tweet">` part; leave out the `<script>` line that follows it). A post that has one
+loads X's script, which turns the quote into the tweet as X shows it. Where the script does not
+run, or once the tweet is deleted, the quote stays: the text, the author and a link.
+
 ## Drafts
 
 A post in progress stays on its branch as a draft pull request, and merging it into `main` is what

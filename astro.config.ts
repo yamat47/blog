@@ -1,5 +1,6 @@
 import { satteri } from "@astrojs/markdown-satteri";
 import { defineConfig } from "astro/config";
+import { captions } from "./src/markdown/captions.ts";
 import { createCardStore } from "./src/markdown/card-store.ts";
 import { fetchPage } from "./src/markdown/fetch-page.ts";
 import { linkCards } from "./src/markdown/link-cards.ts";
@@ -30,7 +31,7 @@ export default defineConfig({
       features: { smartPunctuation: false },
       // Cards first: a link to a post that stands alone becomes a card, and the links that are
       // left get their URL from postLinks.
-      mdastPlugins: [linkCards({ postsDir, cards }), postLinks(postsDir)],
+      mdastPlugins: [linkCards({ postsDir, cards }), postLinks(postsDir), captions()],
     }),
 
     // The highlighter writes var(--astro-code-*) instead of colors of its own, so code blocks take
