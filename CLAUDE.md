@@ -56,6 +56,8 @@ invokes it with `docker compose -f docker/compose.yaml run`.
   at build time cache its result in the repository and fail soft, so that a dead link cannot block a post
 - **Text from another site is never written as HTML.** A link card's title and description come from the linked page.
   They go into the Markdown tree as text nodes, which the processor escapes; do not build a card from an HTML string
+- **A script from another site is loaded only by the pages that need it.** X's widget script is the only one, and only
+  a post with a tweet in it loads it (`src/lib/tweets.ts`). Do not put such a script in the layout
 - TypeScript stays on 6 while `@astrojs/check` does not accept 7 (`.github/dependabot.yml` says when to lift that)
 - Tests run on Node's own test runner (`node --test`, files named `*.test.ts` beside what they test), so a module a
   test loads imports its neighbours with the `.ts` extension. The pages themselves have no tests: they are verified by

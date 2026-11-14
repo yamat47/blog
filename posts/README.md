@@ -83,6 +83,13 @@ To show a caption under an image, give it a title, and leave the image alone in 
 
 An image inside a sentence gets no caption; there its title stays a tooltip.
 
+## Tweets
+
+To show a tweet, paste the HTML that X gives under "Embed post" (the `<blockquote
+class="twitter-tweet">` part; leave out the `<script>` line that follows it). A post that has one
+loads X's script, which turns the quote into the tweet as X shows it. Where the script does not
+run, or once the tweet is deleted, the quote stays: the text, the author and a link.
+
 ## Drafts
 
 A post in progress stays on its branch as a draft pull request, and merging it into `main` is what

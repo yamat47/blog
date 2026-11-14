@@ -3,6 +3,7 @@ import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { formatDay } from "../../lib/date";
 import { getPosts, type Post, postPath } from "../../lib/posts";
+import { hasTweet } from "../../lib/tweets";
 
 // A rest parameter, because the id of a post moved from Hatena Blog has slashes in it
 // (2026/01/01/130022).
@@ -17,9 +18,14 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const hasTweets = hasTweet(post.rendered?.html ?? "");
 ---
 
 <Base title={post.data.title} path={postPath(post)}>
+  {
+    // Asks X not to use the visit for tailoring what the reader is shown there.
+    hasTweets && <meta slot="head" name="twitter:dnt" content="on" />
+  }
   <article>
     <time class="post-date" datetime={post.data.publishedAt.toISOString()}>
       {formatDay(post.data.publishedAt)}
@@ -29,4 +35,12 @@ const { Content } = await render(post);
       <Content />
     </div>
   </article>
+  {
+    // X's script turns each tweet's quote into the tweet as X shows it. It is the only script from
+    // another site, so only a post that has a tweet loads it. Without it, or for a tweet that has
+    // been deleted, the quote stays: the text, the author and a link.
+    hasTweets && (
+      <script is:inline async src="https://platform.twitter.com/widgets.js" charset="utf-8" />
+    )
+  }
 </Base>
