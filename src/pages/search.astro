@@ -116,6 +116,17 @@ import { SITE } from "../site";
     results.replaceChildren(...items);
   }
 
+  /**
+   * Writes the query into the address, so that coming back from a post shows the same results.
+   * An address that already says it is left alone: Google's tag counts each change of the address
+   * as a page view (the layout loads it).
+   */
+  function setAddress(search: string): void {
+    if (location.search !== search) {
+      history.replaceState(null, "", location.pathname + search);
+    }
+  }
+
   const pagefind = loadPagefind();
   pagefind.catch(() => show(FAILED, []));
 
@@ -126,7 +137,7 @@ import { SITE } from "../site";
   async function search(pause: number): Promise<void> {
     const query = input.value.trim();
     if (query === "") {
-      history.replaceState(null, "", location.pathname);
+      setAddress("");
       show("", []);
       return;
     }
@@ -150,8 +161,7 @@ import { SITE } from "../site";
       return;
     }
 
-    // The address carries the query, so that coming back from a post shows the same results.
-    history.replaceState(null, "", `${location.pathname}?q=${encodeURIComponent(query)}`);
+    setAddress(`?q=${encodeURIComponent(query)}`);
     if (found.length === 0) {
       show(`「${query}」を含む記事は見つかりませんでした。`, []);
     } else {

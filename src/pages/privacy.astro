@@ -1,0 +1,25 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../site";
+
+// Google's own account of what it does with the data, which Google Analytics' terms ask a site
+// that reports to it to link to (section 7 of
+// https://marketingplatform.google.com/about/analytics/terms/jp/).
+const GOOGLE_DATA_USE = "https://policies.google.com/technologies/partner-sites?hl=ja";
+---
+
+<Base
+  title="プライバシーポリシー"
+  path={SITE.privacyPath}
+  description="このサイトのアクセス解析について。"
+>
+  <h1 class="post-title">プライバシーポリシー</h1>
+  <div class="prose">
+    {
+      // The paragraph is one line: a line break between two Japanese sentences would show as a
+      // space.
+    }
+    <h2>アクセス解析について</h2>
+    <p>当サイトでは、Google によるアクセス解析ツール「Google アナリティクス」を使用しています。Google アナリティクスは、データの収集のために Cookie を使用しています。このデータは匿名で収集されており、個人を特定するものではありません。Cookie を無効にすることで収集を拒否できますので、お使いのブラウザーの設定をご確認ください。データの扱いについて詳しくは「<a href={GOOGLE_DATA_USE}>Google のサービスを使用するサイトやアプリから収集した情報の Google による使用</a>」をご覧ください。</p>
+  </div>
+</Base>

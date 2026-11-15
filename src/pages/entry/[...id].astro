@@ -57,9 +57,9 @@ const hasTweets = hasTweet(html);
     </div>
   </article>
   {
-    // X's script turns each tweet's quote into the tweet as X shows it. It is the only script from
-    // another site, so only a post that has a tweet loads it. Without it, or for a tweet that has
-    // been deleted, the quote stays: the text, the author and a link.
+    // X's script turns each tweet's quote into the tweet as X shows it. Only a post that has a
+    // tweet needs it, so only such a post loads it. Without it, or for a tweet that has been
+    // deleted, the quote stays: the text, the author and a link.
     hasTweets && (
       <script is:inline async src="https://platform.twitter.com/widgets.js" charset="utf-8" />
     )

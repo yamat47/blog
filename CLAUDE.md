@@ -18,7 +18,7 @@ served by GitHub Pages. The blog used to be on Hatena Blog; the posts written th
 |---|---|
 | `posts/` | The posts: one folder per post, `index.md` with its images beside it |
 | `src/content.config.ts` | The `posts` collection: where the files are and what frontmatter they must have |
-| `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page, the feed (`feed.xml.ts`, with `feed.ts` and `rss.ts` at the paths Hatena Blog used), the card a shared link shows (`og/[...id].png.ts` for a post, `og.png.ts` for the other pages), and the search page (`search.astro`) |
+| `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page, the feed (`feed.xml.ts`, with `feed.ts` and `rss.ts` at the paths Hatena Blog used), the card a shared link shows (`og/[...id].png.ts` for a post, `og.png.ts` for the other pages), the search page (`search.astro`), and the privacy policy (`privacy.astro`) |
 | `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell, helpers for posts, dates, the feed and the share card, the site's name, address and time zone |
 | `fonts/` | The font the share cards are drawn with, where it is from (`README.md`), its license, and the font configuration that keeps other fonts out |
 | `src/markdown/` | Plugins for the Markdown processor (Sätteri, configured in `astro.config.ts`): links between posts, link cards, image captions |
@@ -59,8 +59,11 @@ invokes it with `docker compose -f docker/compose.yaml run`.
   at build time cache its result in the repository and fail soft, so that a dead link cannot block a post
 - **Text from another site is never written as HTML.** A link card's title and description come from the linked page.
   They go into the Markdown tree as text nodes, which the processor escapes; do not build a card from an HTML string
-- **A script from another site is loaded only by the pages that need it.** X's widget script is the only one, and only
-  a post with a tweet in it loads it (`src/lib/tweets.ts`). Do not put such a script in the layout
+- **A script from another site is loaded only by the pages that need it.** There are two. X's widget script is loaded
+  only by a post with a tweet in it (`src/lib/tweets.ts`). Google's tag, which reports visits to Google Analytics, is
+  needed on every page, so it is in the layout, and it loads only on the published host (`googleTagId` in
+  `src/site.ts`). Do not put another such script in the layout. The privacy policy (`src/pages/privacy.astro`) says
+  that the site uses Google Analytics, which its terms require of a site that reports to it: the two go together
 - **Search exists only in a build.** The build runs Pagefind after Astro (`build` in `package.json`); it indexes the
   built pages and writes the index into `dist/pagefind/`. The dev server has the search page without an index and says
   so: look at search with `make preview`. Only what is inside a post's `<article>` is indexed (`data-pagefind-body`),
