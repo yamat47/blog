@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { OG_CARD_SIZE } from "../lib/og-card";
 import { SITE } from "../site";
 
 interface Props {
@@ -7,10 +8,20 @@ interface Props {
   title?: string;
   /** The page's URL path, as it should appear in the canonical link. */
   path: string;
+  /**
+   * What a search result or a shared link says under the title. The site's description when
+   * omitted or empty, which a post without words is.
+   */
+  description?: string;
+  /** What a shared link is said to lead to: `article` for a post. */
+  type?: "article" | "website";
+  /** The URL path of the card a shared link shows; the site's card when omitted. */
+  ogCardPath?: string;
 }
 
-const { title, path } = Astro.props;
+const { title, path, type = "website", ogCardPath = SITE.ogCardPath } = Astro.props;
 const fullTitle = title ? `${title} - ${SITE.title}` : SITE.title;
+const description = Astro.props.description || SITE.description;
 const canonical = new URL(path, Astro.site);
 ---
 
@@ -20,7 +31,21 @@ const canonical = new URL(path, Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
+    <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {
+      // What a link to the page shows where it is shared: Open Graph, which X reads too. The
+      // title goes without the site's name, which has a property of its own.
+    }
+    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title || SITE.title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogCardPath, Astro.site)} />
+    <meta property="og:image:width" content={String(OG_CARD_SIZE.width)} />
+    <meta property="og:image:height" content={String(OG_CARD_SIZE.height)} />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="alternate" type="application/atom+xml" title={SITE.title} href={SITE.feedPath} />
     <slot name="head" />
   </head>

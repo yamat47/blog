@@ -11,6 +11,9 @@ export interface LinkCard {
   date?: string | undefined;
 }
 
+/** The class of a card's link, by which a card is found again in a post's HTML. */
+export const LINK_CARD_CLASS = "link-card";
+
 /** A node of the Markdown tree that the processor renders as the HTML element `data` describes. */
 export interface CardNode {
   type: string;
@@ -62,5 +65,5 @@ export function linkCardNode(card: LinkCard): CardNode {
       }),
     );
   }
-  return element("link-card", "a", { class: "link-card", href: card.href }, children);
+  return element("link-card", "a", { class: LINK_CARD_CLASS, href: card.href }, children);
 }

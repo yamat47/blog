@@ -18,8 +18,9 @@ served by GitHub Pages. The blog used to be on Hatena Blog; the posts written th
 |---|---|
 | `posts/` | The posts: one folder per post, `index.md` with its images beside it |
 | `src/content.config.ts` | The `posts` collection: where the files are and what frontmatter they must have |
-| `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page, and the feed (`feed.xml.ts`, with `feed.ts` and `rss.ts` at the paths Hatena Blog used) |
-| `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell, helpers for posts, dates and the feed, the site's name, address and time zone |
+| `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page, the feed (`feed.xml.ts`, with `feed.ts` and `rss.ts` at the paths Hatena Blog used), and the card a shared link shows (`og/[...id].png.ts` for a post, `og.png.ts` for the other pages) |
+| `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell, helpers for posts, dates, the feed and the share card, the site's name, address and time zone |
+| `fonts/` | The font the share cards are drawn with, where it is from (`README.md`), its license, and the font configuration that keeps other fonts out |
 | `src/markdown/` | Plugins for the Markdown processor (Sätteri, configured in `astro.config.ts`): links between posts, link cards, image captions |
 | `data/link-cards.json` | What link cards show about the pages posts link to. Written by the build when it fetches a new page, committed, and edited by hand for a page that cannot be fetched |
 | `src/styles/` | `tokens.css` holds every design value; `global.css` uses them |
@@ -50,7 +51,8 @@ invokes it with `docker compose -f docker/compose.yaml run`.
   `/entry/foo` without a redirect. Write internal links without a trailing slash and without `.html`
 - **Design values live in `src/styles/tokens.css` only.** Colors, sizes, weights and fonts are read through its variables
   everywhere else. The look is a placeholder: a design system in its own repository (pylon) will replace that file, and
-  shared components will come from it. Do not grow a component library here
+  shared components will come from it. Do not grow a component library here. The share card is an image, so it keeps
+  its pixel sizes in `src/lib/og-card.ts` and is drawn with the font in `fonts/`; its colors are read from `tokens.css`
 - **Keep dependencies few.** The site was self-hosted once before and went back to Hatena because of upkeep. Prefer a
   small plugin written in this repository to a third-party integration, and make anything that fetches from the network
   at build time cache its result in the repository and fail soft, so that a dead link cannot block a post

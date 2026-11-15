@@ -43,6 +43,14 @@ updates:
       - dependency-name: typescript
         update-types:
           - version-update:semver-major
+      # astro installs sharp to resize images, in a range of one minor (^0.35), and the share
+      # cards are drawn with that same copy (src/lib/og-card.ts). A newer minor here would
+      # install a second copy beside astro's. Raise it by hand in the pull request that bumps
+      # astro to a version that accepts it; patches still arrive on their own.
+      - dependency-name: sharp
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-major
       # Its major is the major of Node, so it is raised by hand in the pull request that bumps
       # Node (the docker entry below; docker/Dockerfile lists what else changes there). Types for
       # a newer Node would let code use what the runtime does not have.

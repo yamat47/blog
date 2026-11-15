@@ -1,3 +1,5 @@
+import { decodeEntities, oneLine } from "../lib/text.ts";
+
 /** What a page says about itself in its `<head>`. Every field is missing when the page does not say. */
 export interface PageMetadata {
   title?: string | undefined;
@@ -7,46 +9,16 @@ export interface PageMetadata {
   site?: string | undefined;
 }
 
-const NAMED_ENTITIES: Readonly<Record<string, string>> = {
-  amp: "&",
-  lt: "<",
-  gt: ">",
-  quot: '"',
-  apos: "'",
-  nbsp: " ",
-};
-
 // A description is shown in two or three lines; a page that puts its whole body there would
 // otherwise fill the cache file.
 const MAX_TEXT_LENGTH = 300;
-
-const LAST_CODE_POINT = 0x10ffff;
-
-function decodeEntities(text: string): string {
-  return text.replace(/&(?:#(\d+)|#x([0-9a-f]+)|([a-z]+));/gi, (entity, decimal, hex, name) => {
-    if (name !== undefined) {
-      return NAMED_ENTITIES[String(name).toLowerCase()] ?? entity;
-    }
-    const codePoint =
-      decimal === undefined ? Number.parseInt(hex, 16) : Number.parseInt(decimal, 10);
-    // A number that is no character stays as written; String.fromCodePoint would throw on it.
-    return codePoint <= LAST_CODE_POINT ? String.fromCodePoint(codePoint) : entity;
-  });
-}
 
 function clean(text: string | undefined): string | undefined {
   if (text === undefined) {
     return undefined;
   }
-  const cleaned = decodeEntities(text).replace(/\s+/g, " ").trim();
-  if (cleaned === "") {
-    return undefined;
-  }
-  // Counted and cut by character: cutting by UTF-16 unit could leave half of an emoji.
-  const characters = [...cleaned];
-  return characters.length > MAX_TEXT_LENGTH
-    ? `${characters.slice(0, MAX_TEXT_LENGTH - 1).join("")}…`
-    : cleaned;
+  const cleaned = oneLine(decodeEntities(text), MAX_TEXT_LENGTH);
+  return cleaned === "" ? undefined : cleaned;
 }
 
 /** The first of `candidates` that has text in it. A tag that is present but empty does not count. */
