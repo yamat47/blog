@@ -9,6 +9,8 @@ export const SITE = {
   ogCardPath: "/og.png",
   // The page that searches the posts. Hatena Blog searched at the same path.
   searchPath: "/search",
+  // The privacy policy, which says that the site uses Google Analytics.
+  privacyPath: "/privacy",
   // The Google tag that reports visits to Google Analytics. Which Analytics property it reports
   // to is set in the tag's settings at Google, not here.
   googleTagId: "GTM-5PJ9MVKB",

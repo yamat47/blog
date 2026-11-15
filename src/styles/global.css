@@ -25,7 +25,8 @@ a {
 }
 
 .site-header,
-.site-main {
+.site-main,
+.site-footer {
   max-width: var(--measure);
   margin-inline: auto;
   padding-inline: var(--space-4);
@@ -53,6 +54,12 @@ a {
 
 .site-main {
   padding-block: var(--space-10);
+}
+
+.site-footer {
+  padding-block: var(--space-6);
+  border-top: var(--border-width) solid var(--color-border);
+  font-size: var(--text-sm);
 }
 
 .post-list {
