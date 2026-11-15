@@ -59,8 +59,10 @@ invokes it with `docker compose -f docker/compose.yaml run`.
   at build time cache its result in the repository and fail soft, so that a dead link cannot block a post
 - **Text from another site is never written as HTML.** A link card's title and description come from the linked page.
   They go into the Markdown tree as text nodes, which the processor escapes; do not build a card from an HTML string
-- **A script from another site is loaded only by the pages that need it.** X's widget script is the only one, and only
-  a post with a tweet in it loads it (`src/lib/tweets.ts`). Do not put such a script in the layout
+- **A script from another site is loaded only by the pages that need it.** There are two. X's widget script is loaded
+  only by a post with a tweet in it (`src/lib/tweets.ts`). Google's tag, which reports visits to Google Analytics, is
+  needed on every page, so it is in the layout, and it loads only on the published host (`googleTagId` in
+  `src/site.ts`). Do not put another such script in the layout
 - **Search exists only in a build.** The build runs Pagefind after Astro (`build` in `package.json`); it indexes the
   built pages and writes the index into `dist/pagefind/`. The dev server has the search page without an index and says
   so: look at search with `make preview`. Only what is inside a post's `<article>` is indexed (`data-pagefind-body`),

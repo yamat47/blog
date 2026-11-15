@@ -23,6 +23,7 @@ const { title, path, type = "website", ogCardPath = SITE.ogCardPath } = Astro.pr
 const fullTitle = title ? `${title} - ${SITE.title}` : SITE.title;
 const description = Astro.props.description || SITE.description;
 const canonical = new URL(path, Astro.site);
+const siteHost = new URL(SITE.url).hostname;
 ---
 
 <!doctype html>
@@ -48,6 +49,27 @@ const canonical = new URL(path, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="alternate" type="application/atom+xml" title={SITE.title} href={SITE.feedPath} />
     <slot name="head" />
+    {
+      // Google's tag, which reports the visit to Google Analytics. It is the code the tag's
+      // installation instructions at Google give, written as a script for one reason: the tag is
+      // loaded only where the site is published, so a build looked at on a developer's machine
+      // reports nothing. That code is the `gtag` one, not the Tag Manager snippet the id suggests,
+      // and `gtag` is set on `window` because Google's code declares it as a global.
+    }
+    <script is:inline define:vars={{ tagId: SITE.googleTagId, siteHost }}>
+      if (location.hostname === siteHost) {
+        const tag = document.createElement("script");
+        tag.src = `https://www.googletagmanager.com/gtm.js?id=${tagId}`;
+        document.head.append(tag);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function gtag() {
+          // biome-ignore lint/complexity/noArguments: the tag reads the arguments object itself and ignores an array
+          window.dataLayer.push(arguments);
+        };
+        window.gtag("js", new Date());
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">

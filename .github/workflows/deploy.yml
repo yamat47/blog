@@ -6,7 +6,10 @@ on:
   # moves the Pages site would sit under yamat47.github.io/blog/, a sub-path the root-relative
   # links of this site do not work under. `push` to main is added when the domain moves.
   # After the first deploy there, search for a word on /search: the index (dist/pagefind/) is
-  # files GitHub Pages has not served for this site before.
+  # files GitHub Pages has not served for this site before. Open a page and look for the visit
+  # in Google Analytics' Realtime report too: the tag loads only on that domain.
+  # Before the domain moves, the site needs a notice that it uses Google Analytics and its
+  # cookies, which Google Analytics' terms require of a site that reports to it.
   workflow_dispatch:
 
 permissions: {}
