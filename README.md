@@ -8,8 +8,8 @@ static site with [Astro](https://astro.build/) and served by GitHub Pages.
 Add a folder with an `index.md` under `posts/`; [`posts/README.md`](posts/README.md) describes the
 frontmatter and how the folder name becomes the URL.
 
-Publishing is [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). It is run by hand until
-blog.yamat47.me points at GitHub Pages; after that, merging a pull request into `main` publishes.
+Publishing is [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml): merging a pull request into
+`main` publishes.
 
 ## Development
 
