@@ -37,8 +37,18 @@ const hasTweets = hasTweet(html);
     // Asks X not to use the visit for tailoring what the reader is shown there.
     hasTweets && <meta slot="head" name="twitter:dnt" content="on" />
   }
-  <article>
-    <time class="post-date" datetime={post.data.publishedAt.toISOString()}>
+  {
+    // The data-pagefind attributes are for the search index, which the build makes from the built
+    // pages. The article is what a post is found by: a page without this mark is never a result.
+    // The date is shown with a result and is not itself searched.
+  }
+  <article data-pagefind-body>
+    <time
+      class="post-date"
+      datetime={post.data.publishedAt.toISOString()}
+      data-pagefind-meta="date"
+      data-pagefind-ignore
+    >
       {formatDay(post.data.publishedAt)}
     </time>
     <h1 class="post-title">{post.data.title}</h1>

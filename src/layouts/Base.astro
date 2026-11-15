@@ -52,6 +52,9 @@ const canonical = new URL(path, Astro.site);
   <body>
     <header class="site-header">
       <a class="site-title" href="/">{SITE.title}</a>
+      <nav class="site-nav">
+        <a href={SITE.searchPath}>検索</a>
+      </nav>
     </header>
     <main class="site-main">
       <slot />

@@ -5,6 +5,8 @@ on:
   # Run by hand only, for now. blog.yamat47.me still resolves to Hatena Blog, and until the domain
   # moves the Pages site would sit under yamat47.github.io/blog/, a sub-path the root-relative
   # links of this site do not work under. `push` to main is added when the domain moves.
+  # After the first deploy there, search for a word on /search: the index (dist/pagefind/) is
+  # files GitHub Pages has not served for this site before.
   workflow_dispatch:
 
 permissions: {}
@@ -46,7 +48,7 @@ jobs:
       - name: Typecheck (astro check)
         run: pnpm run typecheck
 
-      - name: Build (Astro)
+      - name: Build (Astro, then the search index)
         run: pnpm run build
 
       - name: Upload the site

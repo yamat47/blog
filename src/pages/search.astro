@@ -1,0 +1,175 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../site";
+---
+
+<Base title="検索" path={SITE.searchPath}>
+  {
+    // Every visit shows another query's results, so there is nothing here for a search engine.
+  }
+  <meta slot="head" name="robots" content="noindex" />
+  <h1 class="post-title">検索</h1>
+  <search>
+    {
+      // Submitted before the script runs, the form leads back to this page with ?q=, which the
+      // script reads when the page opens.
+    }
+    <form class="search-form">
+      <input
+        id="search-input"
+        type="search"
+        name="q"
+        aria-label="検索する言葉"
+        placeholder="記事を検索"
+        autocomplete="off"
+      />
+    </form>
+  </search>
+  <noscript><p>検索には JavaScript が必要です。</p></noscript>
+  <p id="search-status" class="search-status" role="status"></p>
+  <ul id="search-results" class="post-list"></ul>
+</Base>
+
+<script>
+  // The search runs in the reader's browser, on the index the build writes beside the pages
+  // (dist/pagefind/). Pagefind's own script is part of that index, so it is loaded from there
+  // when the page opens and not bundled with this one.
+  const PAGEFIND_PATH = "/pagefind/pagefind.js";
+
+  // The dev server has the pages but no index: only a build writes one.
+  const FAILED = import.meta.env.DEV
+    ? "開発サーバーには検索の索引がありません。ビルドしたサイトで検索できます。"
+    : "検索を読み込めませんでした。";
+
+  // How long the search waits for the next key before it runs, in milliseconds.
+  const TYPING_PAUSE = 300;
+
+  /** What Pagefind knows about a post it found. */
+  interface Found {
+    /** The path of the built file, which ends in `.html`. */
+    url: string;
+    /** The words around the match. Pagefind escapes them and marks the match with `<mark>`. */
+    excerpt: string;
+    /** The post's title, and its date as its page shows it (src/pages/entry/[...id].astro). */
+    meta: { title: string; date: string };
+  }
+
+  /** The part of Pagefind's script this page calls (https://pagefind.app/docs/api/). */
+  interface Pagefind {
+    options(options: { excerptEllipsis: string }): Promise<void>;
+    init(): Promise<void>;
+    /**
+     * The posts a query finds, once no other call has come for `pause` milliseconds. Null when
+     * one has: that call answers in this one's place.
+     */
+    debouncedSearch(
+      query: string,
+      options: Record<string, never>,
+      pause: number,
+    ): Promise<{ results: { data(): Promise<Found> }[] } | null>;
+  }
+
+  function element<T extends Element>(selector: string): T {
+    const found = document.querySelector<T>(selector);
+    if (!found) {
+      throw new Error(`the search page has no ${selector}`);
+    }
+    return found;
+  }
+
+  const form = element<HTMLFormElement>(".search-form");
+  const input = element<HTMLInputElement>("#search-input");
+  const status = element<HTMLElement>("#search-status");
+  const results = element<HTMLElement>("#search-results");
+
+  async function loadPagefind(): Promise<Pagefind> {
+    const loaded: Pagefind = await import(/* @vite-ignore */ PAGEFIND_PATH);
+    // Marks where the words shown under a result were cut out of the post.
+    await loaded.options({ excerptEllipsis: "…" });
+    // Fetches the index now, while the reader is still typing.
+    await loaded.init();
+    return loaded;
+  }
+
+  /** A found post as the list of posts shows one, with the words around the match under it. */
+  function resultItem({ url, excerpt, meta }: Found): HTMLLIElement {
+    const date = document.createElement("span");
+    date.className = "post-date";
+    date.textContent = meta.date;
+
+    const link = document.createElement("a");
+    // The site's URLs have no `.html` (build.format in astro.config.ts).
+    link.href = url.replace(/\.html$/, "");
+    link.textContent = meta.title;
+
+    const text = document.createElement("p");
+    text.className = "search-excerpt";
+    text.innerHTML = excerpt;
+
+    const item = document.createElement("li");
+    item.append(date, link, text);
+    return item;
+  }
+
+  function show(message: string, items: HTMLLIElement[]): void {
+    status.textContent = message;
+    results.replaceChildren(...items);
+  }
+
+  const pagefind = loadPagefind();
+  pagefind.catch(() => show(FAILED, []));
+
+  /**
+   * Shows the posts that have what the field holds, and keeps the address in step with it. The
+   * search runs once the reader has stopped typing for `pause` milliseconds.
+   */
+  async function search(pause: number): Promise<void> {
+    const query = input.value.trim();
+    if (query === "") {
+      history.replaceState(null, "", location.pathname);
+      show("", []);
+      return;
+    }
+
+    let found: Found[];
+    try {
+      const answer = await (await pagefind).debouncedSearch(query, {}, pause);
+      if (answer === null) {
+        return;
+      }
+      // Every found post is loaded, one small file each. Once the posts are many, load the first
+      // few and the rest on request.
+      found = await Promise.all(answer.results.map((result) => result.data()));
+    } catch {
+      show(FAILED, []);
+      return;
+    }
+
+    // The reader typed on while the results were loading: the search for that is on its way.
+    if (input.value.trim() !== query) {
+      return;
+    }
+
+    // The address carries the query, so that coming back from a post shows the same results.
+    history.replaceState(null, "", `${location.pathname}?q=${encodeURIComponent(query)}`);
+    if (found.length === 0) {
+      show(`「${query}」を含む記事は見つかりませんでした。`, []);
+    } else {
+      show(`${found.length}件の記事が見つかりました。`, found.map(resultItem));
+    }
+  }
+
+  // While Japanese is being composed the field holds unfinished kana, which finds nothing the
+  // reader means. The search waits for the composition to end.
+  input.addEventListener("input", (event) => {
+    if (!(event instanceof InputEvent && event.isComposing)) {
+      void search(TYPING_PAUSE);
+    }
+  });
+  input.addEventListener("compositionend", () => void search(TYPING_PAUSE));
+  // Enter has nothing left to do: what is typed is already searched.
+  form.addEventListener("submit", (event) => event.preventDefault());
+
+  input.value = new URLSearchParams(location.search).get("q") ?? "";
+  void search(0);
+</script>

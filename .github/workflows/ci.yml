@@ -46,7 +46,7 @@ jobs:
       - name: Test (node --test)
         run: pnpm run test
 
-      - name: Build (Astro)
+      - name: Build (Astro, then the search index)
         run: pnpm run build
 
       # The steps above fetch any page a post links to that data/link-cards.json does not have

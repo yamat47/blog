@@ -99,6 +99,16 @@ Both are made by the build; a post sets neither.
   so that it fits. The card's font has no emoji, so one in a title is drawn as a small box there.
 - The text is the start of the post, without its headings, code blocks and link cards.
 
+## Search
+
+The search page (`/search`) finds a post by its title and by what it says, a tweet it quotes
+included. The words of a link card are not searched: a card is a preview of another page, and its
+words are that page's, not the post's.
+
+Nothing needs doing for a new post. The build makes the index from the built pages, so a post is
+found from the deploy that publishes it. The dev server has no index; `make preview` serves a
+build, where search works.
+
 ## Drafts
 
 A post in progress stays on its branch as a draft pull request, and merging it into `main` is what
