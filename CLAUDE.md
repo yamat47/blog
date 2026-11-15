@@ -75,6 +75,6 @@ invokes it with `docker compose -f docker/compose.yaml run`.
 
 ## Deploying
 
-`.github/workflows/deploy.yml` publishes to GitHub Pages. It runs by hand only until blog.yamat47.me points at GitHub
-Pages; the comment at its top says what changes then. The repository's settings (Pages, required checks) are declared in
-yamat47/infra-github, and the DNS record in yamat47/infra-yamat47.
+`.github/workflows/deploy.yml` publishes to GitHub Pages on every push to `main`, so merging a pull request publishes
+it. The repository's settings (Pages and its domain, required checks) are declared in yamat47/infra-github, and the DNS
+record in yamat47/infra-yamat47.

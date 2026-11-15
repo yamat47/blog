@@ -2,13 +2,18 @@
 name: Deploy
 
 on:
-  # Run by hand only, for now. blog.yamat47.me still resolves to Hatena Blog, and until the domain
-  # moves the Pages site would sit under yamat47.github.io/blog/, a sub-path the root-relative
-  # links of this site do not work under. `push` to main is added when the domain moves.
-  # After the first deploy there, search for a word on /search: the index (dist/pagefind/) is
-  # files GitHub Pages has not served for this site before. Open a page and look for the visit
-  # in Google Analytics' Realtime report too: the tag loads only on that domain.
+  # A merge into main publishes: that is how a post goes out.
+  push:
+    branches: [main]
+  # By hand, to publish main again without a merge, or to see that another branch builds.
   workflow_dispatch:
+
+# Runs for one branch go one at a time, so the site is not left at an older merge whose build
+# happened to finish last. A run is not cancelled once it has started: a deploy runs to the end.
+# A run that waits gives way to a newer one, which holds its changes too.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions: {}
 
@@ -63,11 +68,6 @@ jobs:
     # on branches.
     if: github.ref == 'refs/heads/main'
     needs: build
-    # Only publishing is serialized, so a build from another branch never cancels a queued
-    # deploy. A deploy runs to the end; the next one waits for it.
-    concurrency:
-      group: ${{ github.workflow }}-deploy
-      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:

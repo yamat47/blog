@@ -112,4 +112,4 @@ build, where search works.
 ## Drafts
 
 A post in progress stays on its branch as a draft pull request, and merging it into `main` is what
-publishes it (once the deploy workflow runs on `main`; see the repository README).
+publishes it.
