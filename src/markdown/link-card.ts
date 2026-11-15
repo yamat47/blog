@@ -41,6 +41,9 @@ function span(className: string, text: string): CardNode {
  * The thumbnail is loaded from the other site, which can drop it any day. An image that fails to
  * load removes itself, and the card is laid out as one without a thumbnail. No referrer is sent,
  * so the other site does not learn which post a reader has open.
+ *
+ * The card is kept out of the search index (`data-pagefind-ignore`): its words are the linked
+ * page's, and indexed they would make the post a result for what another page says.
  */
 export function linkCardNode(card: LinkCard): CardNode {
   const body = [span("link-card-title", card.title)];
@@ -65,5 +68,10 @@ export function linkCardNode(card: LinkCard): CardNode {
       }),
     );
   }
-  return element("link-card", "a", { class: LINK_CARD_CLASS, href: card.href }, children);
+  return element(
+    "link-card",
+    "a",
+    { class: LINK_CARD_CLASS, href: card.href, "data-pagefind-ignore": "all" },
+    children,
+  );
 }

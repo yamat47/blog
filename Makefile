@@ -47,8 +47,14 @@ logs: ## Follow the dev server logs
 	$(COMPOSE) logs -f dev
 
 .PHONY: build
-build: ## Build the site (dist/)
+build: ## Build the site and its search index (dist/)
 	$(PNPM) run build
+
+.PHONY: preview
+preview: ## Build the site and serve it in the background (http://localhost:4322)
+	$(host_only)
+	$(MAKE) build
+	$(COMPOSE) up -d --wait preview
 
 .PHONY: typecheck
 typecheck: ## Typecheck (astro check)

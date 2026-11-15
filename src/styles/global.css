@@ -32,6 +32,10 @@ a {
 }
 
 .site-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
   padding-block: var(--space-6);
   border-bottom: var(--border-width) solid var(--color-border);
 }
@@ -41,6 +45,10 @@ a {
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   text-decoration: none;
+}
+
+.site-nav {
+  font-size: var(--text-sm);
 }
 
 .site-main {
@@ -63,7 +71,8 @@ a {
   line-height: var(--leading-tight);
 }
 
-.post-date {
+.post-date,
+.search-status {
   color: var(--color-ink-muted);
   font-size: var(--text-sm);
 }
@@ -72,6 +81,30 @@ a {
   margin-block: var(--space-1) var(--space-10);
   font-size: var(--text-xl);
   line-height: var(--leading-tight);
+}
+
+/* The search page (src/pages/search.astro). Its results are a list of posts, as on the top page. */
+.search-form input {
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: inherit;
+  font: inherit;
+}
+
+/* The words around what was found. */
+.search-excerpt {
+  margin-block: var(--space-1) 0;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-tight);
+}
+
+.search-excerpt mark {
+  background: var(--color-mark);
+  color: var(--color-ink);
 }
 
 /* The rendered Markdown of a post. */

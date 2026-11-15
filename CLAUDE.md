@@ -18,7 +18,7 @@ served by GitHub Pages. The blog used to be on Hatena Blog; the posts written th
 |---|---|
 | `posts/` | The posts: one folder per post, `index.md` with its images beside it |
 | `src/content.config.ts` | The `posts` collection: where the files are and what frontmatter they must have |
-| `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page, the feed (`feed.xml.ts`, with `feed.ts` and `rss.ts` at the paths Hatena Blog used), and the card a shared link shows (`og/[...id].png.ts` for a post, `og.png.ts` for the other pages) |
+| `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page, the feed (`feed.xml.ts`, with `feed.ts` and `rss.ts` at the paths Hatena Blog used), the card a shared link shows (`og/[...id].png.ts` for a post, `og.png.ts` for the other pages), and the search page (`search.astro`) |
 | `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell, helpers for posts, dates, the feed and the share card, the site's name, address and time zone |
 | `fonts/` | The font the share cards are drawn with, where it is from (`README.md`), its license, and the font configuration that keeps other fonts out |
 | `src/markdown/` | Plugins for the Markdown processor (Sätteri, configured in `astro.config.ts`): links between posts, link cards, image captions |
@@ -39,6 +39,7 @@ invokes it with `docker compose -f docker/compose.yaml run`.
 | Type check / lint / auto-fix / test | `make typecheck` / `make lint` / `make fix` / `make test` |
 | Build the site | `make build` (`dist/`) |
 | Dev server | `make up` (http://localhost:4321) / `make logs` / `make down` |
+| The built site | `make preview` (http://localhost:4322) / `make down` |
 | Add or update dependencies | `make pnpm ARGS="add -D <pkg>"` (the lockfile is also updated on the host) |
 | First run, or after changing the Dockerfile | `make setup` |
 
@@ -60,6 +61,10 @@ invokes it with `docker compose -f docker/compose.yaml run`.
   They go into the Markdown tree as text nodes, which the processor escapes; do not build a card from an HTML string
 - **A script from another site is loaded only by the pages that need it.** X's widget script is the only one, and only
   a post with a tweet in it loads it (`src/lib/tweets.ts`). Do not put such a script in the layout
+- **Search exists only in a build.** The build runs Pagefind after Astro (`build` in `package.json`); it indexes the
+  built pages and writes the index into `dist/pagefind/`. The dev server has the search page without an index and says
+  so: look at search with `make preview`. Only what is inside a post's `<article>` is indexed (`data-pagefind-body`),
+  less its link cards (`data-pagefind-ignore`); a page without that mark is never a search result
 - TypeScript stays on 6 while `@astrojs/check` does not accept 7 (`.github/dependabot.yml` says when to lift that)
 - Tests run on Node's own test runner (`node --test`, files named `*.test.ts` beside what they test), so a module a
   test loads imports its neighbours with the `.ts` extension. The pages themselves have no tests: they are verified by

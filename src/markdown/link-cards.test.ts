@@ -73,7 +73,7 @@ describe("linkCards", () => {
       await render("前の段落\n\nhttps://example.com/guide\n\n次の段落"),
       [
         "<p>前の段落</p>",
-        '<a class="link-card" href="https://example.com/guide">' +
+        '<a class="link-card" href="https://example.com/guide" data-pagefind-ignore="all">' +
           '<span class="link-card-body">' +
           '<span class="link-card-title">ガイド &lt;script&gt;alert(1)&lt;/script&gt;</span>' +
           '<span class="link-card-description">説明 &amp; 補足</span>' +
@@ -90,7 +90,7 @@ describe("linkCards", () => {
   it("names the site by its host and leaves out what the page does not have", async () => {
     assert.equal(
       await render("https://example.com/plain"),
-      '<a class="link-card" href="https://example.com/plain">' +
+      '<a class="link-card" href="https://example.com/plain" data-pagefind-ignore="all">' +
         '<span class="link-card-body">' +
         '<span class="link-card-title">画像のないページ</span>' +
         '<span class="link-card-site">example.com</span>' +
@@ -108,7 +108,7 @@ describe("linkCards", () => {
   it("shows the URL as the title of a page nothing is known about", async () => {
     assert.equal(
       await render("https://down.example/page"),
-      '<a class="link-card" href="https://down.example/page">' +
+      '<a class="link-card" href="https://down.example/page" data-pagefind-ignore="all">' +
         '<span class="link-card-body">' +
         '<span class="link-card-title">https://down.example/page</span>' +
         '<span class="link-card-site">down.example</span>' +
@@ -119,7 +119,7 @@ describe("linkCards", () => {
   it("turns a link to a post alone on its line into a card of that post", async () => {
     assert.equal(
       await render("[前に書いた記事](../2022-06-02-turning-29/index.md)"),
-      '<a class="link-card" href="/entry/2022/06/02/002443">' +
+      '<a class="link-card" href="/entry/2022/06/02/002443" data-pagefind-ignore="all">' +
         '<span class="link-card-body">' +
         '<span class="link-card-title">29歳になりました</span>' +
         '<span class="link-card-site">blog.yamat47.me · 2022-06-02</span>' +

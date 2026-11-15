@@ -7,6 +7,8 @@ export const SITE = {
   feedPath: "/feed.xml",
   // The card a shared link shows for a page without one of its own.
   ogCardPath: "/og.png",
+  // The page that searches the posts. Hatena Blog searched at the same path.
+  searchPath: "/search",
   lang: "ja",
   // Dates are shown as the day they had in Japan, wherever the build runs.
   timeZone: "Asia/Tokyo",

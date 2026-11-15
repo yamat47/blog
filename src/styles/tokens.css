@@ -10,6 +10,8 @@
   --color-ink-muted: #59636e;
   --color-link: #0969da;
   --color-border: #d1d9e0;
+  /* Behind the words a search found. */
+  --color-mark: #fff8c5;
 
   --font-sans: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;

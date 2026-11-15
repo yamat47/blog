@@ -12,6 +12,14 @@ x-base: &base
     - node_modules:/workspace/node_modules
     - pnpm-store:/home/node/.local/share/pnpm/store
 
+# Passes once the server in the container answers. make up and make preview are docker compose up
+# --wait, which waits for this.
+x-answers: &answers
+  test: ["CMD", "node", "-e", "fetch('http://localhost:4321/').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+  interval: 2s
+  start_period: 60s
+  start_interval: 1s
+
 services:
   # Runs Makefile tasks (docker compose run --rm)
   workspace:
@@ -28,12 +36,16 @@ services:
       # In some environments (such as colima's default), edits on the host do not reach the container
       # via inotify, so pick them up by polling. The chokidar bundled with Vite reads this variable
       CHOKIDAR_USEPOLLING: "true"
-    # make up is docker compose up --wait, which waits until this passes
-    healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://localhost:4321/').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
-      interval: 2s
-      start_period: 60s
-      start_interval: 1s
+    healthcheck: *answers
+
+  # Serves the built site, dist/ (make preview). What only a build has is looked at here: the
+  # search index is not on the dev server.
+  preview:
+    <<: *base
+    command: pnpm run preview
+    ports:
+      - "4322:4321"
+    healthcheck: *answers
 
 volumes:
   node_modules:
