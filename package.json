@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --host",
-    "build": "astro build --force && pagefind --site dist",
+    "build": "astro build --force && pagefind --site dist --exclude-selectors time",
     "preview": "astro preview --host",
     "typecheck": "astro check",
     "lint": "biome check --error-on-warnings .",

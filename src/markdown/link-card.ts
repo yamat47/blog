@@ -1,3 +1,7 @@
+import { LinkCard as Card } from "@yamat47/pylon";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+
 /** What a link card shows. Everything but `href` comes from the linked page, so none of it is trusted. */
 export interface LinkCard {
   href: string;
@@ -11,67 +15,36 @@ export interface LinkCard {
   date?: string | undefined;
 }
 
-/** The class of a card's link, by which a card is found again in a post's HTML. */
-export const LINK_CARD_CLASS = "link-card";
+/**
+ * The mark on a card's link, which keeps the card out of the search index and by which a card is
+ * found again in a post's HTML.
+ */
+export const LINK_CARD_MARK = 'data-pagefind-ignore="all"';
 
-/** A node of the Markdown tree that the processor renders as the HTML element `data` describes. */
+/** A node of the Markdown tree that the processor writes into the page as the HTML it holds. */
 export interface CardNode {
-  type: string;
-  data: { hName: string; hProperties: Record<string, string> };
-  children: (CardNode | { type: "text"; value: string })[];
-}
-
-function element(
-  type: string,
-  hName: string,
-  hProperties: Record<string, string>,
-  children: CardNode["children"] = [],
-): CardNode {
-  return { type, data: { hName, hProperties }, children };
-}
-
-function span(className: string, text: string): CardNode {
-  return element(className, "span", { class: className }, [{ type: "text", value: text }]);
+  type: "html";
+  value: string;
 }
 
 /**
- * The Markdown tree node of a card: a link holding the title, the description, the site and the
- * thumbnail. Texts are tree nodes, not HTML, so the processor escapes them.
+ * The Markdown tree node of a card: the design system's link card, rendered to HTML here, when
+ * the post is built. React writes every text it is given as text, so what the linked page says
+ * of itself cannot become markup.
  *
- * The thumbnail is loaded from the other site, which can drop it any day. An image that fails to
- * load removes itself, and the card is laid out as one without a thumbnail. No referrer is sent,
- * so the other site does not learn which post a reader has open.
+ * The card is kept out of the search index (`LINK_CARD_MARK`): its words are the linked page's,
+ * and indexed they would make the post a result for what another page says. The component knows
+ * nothing of the index, so the mark is put on its first tag here.
  *
- * The card is kept out of the search index (`data-pagefind-ignore`): its words are the linked
- * page's, and indexed they would make the post a result for what another page says.
+ * TODO: pass the mark as a prop once pylon's `LinkCard` hands `data-*` attributes to its link, and
+ * drop the edit of the rendered HTML.
  */
 export function linkCardNode(card: LinkCard): CardNode {
-  const body = [span("link-card-title", card.title)];
-  if (card.description !== undefined) {
-    body.push(span("link-card-description", card.description));
-  }
-  body.push(
-    span("link-card-site", card.date === undefined ? card.site : `${card.site} · ${card.date}`),
-  );
-
-  const children = [element("link-card-body", "span", { class: "link-card-body" }, body)];
-  if (card.image !== undefined) {
-    children.push(
-      element("link-card-image", "img", {
-        class: "link-card-image",
-        src: card.image,
-        alt: "",
-        loading: "lazy",
-        decoding: "async",
-        referrerpolicy: "no-referrer",
-        onerror: "this.remove()",
-      }),
+  const html = renderToStaticMarkup(createElement(Card, card));
+  if (!html.startsWith("<a ")) {
+    throw new Error(
+      "a link card no longer starts with its link, so it cannot be marked for the search index",
     );
   }
-  return element(
-    "link-card",
-    "a",
-    { class: LINK_CARD_CLASS, href: card.href, "data-pagefind-ignore": "all" },
-    children,
-  );
+  return { type: "html", value: html.replace("<a ", `<a ${LINK_CARD_MARK} `) };
 }

@@ -41,8 +41,10 @@ export default defineConfig({
       mdastPlugins: [linkCards({ postsDir, cards }), postLinks(postsDir), captions()],
     }),
 
-    // The highlighter writes var(--astro-code-*) instead of colors of its own, so code blocks take
-    // theirs from src/styles/tokens.css like everything else.
-    shikiConfig: { theme: "css-variables" },
+    // Code is left as plain text, which the design system sets on its tint. It has no colors for
+    // highlighted code yet, and a highlighter's own would not follow its light and dark.
+    // TODO: highlight again once pylon has those colors ("Not decided yet" in its CLAUDE.md). No
+    // post has a block of code so far.
+    syntaxHighlight: false,
   },
 });

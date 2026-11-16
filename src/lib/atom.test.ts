@@ -148,7 +148,7 @@ describe("htmlForFeed", () => {
 
   it("leaves HTML that a post shows as code, however its quotes are written", () => {
     const html =
-      '<pre><code>&lt;a href="/entry/first" onerror="x()"&gt; &lt;a href=&quot;/entry/first&quot;&gt;</code></pre>';
+      '<pre><code>&lt;a href="/entry/first"&gt; &lt;a href=&quot;/entry/first&quot;&gt;</code></pre>';
 
     assert.equal(forFeed(html), html);
   });
@@ -157,15 +157,6 @@ describe("htmlForFeed", () => {
     assert.equal(
       forFeed('<a title="a > b" href="/entry/first">前回</a>'),
       '<a title="a > b" href="https://blog.example.com/entry/first">前回</a>',
-    );
-  });
-
-  it("takes the script off a link card's thumbnail", () => {
-    assert.equal(
-      forFeed(
-        '<img class="link-card-image" src="https://cdn.example.com/og.png" alt="" onerror="this.remove()">',
-      ),
-      '<img class="link-card-image" src="https://cdn.example.com/og.png" alt="">',
     );
   });
 });

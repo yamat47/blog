@@ -1,10 +1,10 @@
-import { LINK_CARD_CLASS } from "../markdown/link-card.ts";
+import { LINK_CARD_MARK } from "../markdown/link-card.ts";
 import { decodeEntities, oneLine } from "./text.ts";
 
 // What does not read as the post's own sentences: a heading, which has no full stop and would run
 // into the paragraph after it, code, a card about another page, and what a browser does not show.
 const NOT_PROSE = new RegExp(
-  `<(h[1-6]|pre|script|style)\\b[\\s\\S]*?</\\1>|<a\\b[^>]*\\bclass="${LINK_CARD_CLASS}"[\\s\\S]*?</a>`,
+  `<(h[1-6]|pre|script|style)\\b[\\s\\S]*?</\\1>|<a\\b[^>]*\\s${LINK_CARD_MARK}[\\s\\S]*?</a>`,
   "g",
 );
 const LINE_BREAK = /<br\b[^>]*>/g;
