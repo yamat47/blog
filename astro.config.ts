@@ -1,4 +1,5 @@
 import { satteri } from "@astrojs/markdown-satteri";
+import react from "@astrojs/react";
 import { defineConfig } from "astro/config";
 import { captions } from "./src/markdown/captions.ts";
 import { createCardStore } from "./src/markdown/card-store.ts";
@@ -16,6 +17,12 @@ const cards = createCardStore({
 
 export default defineConfig({
   site: SITE.url,
+
+  // The pages are made of the design system's components (@yamat47/pylon), which are React. None
+  // is hydrated: they are rendered to HTML when the site is built, and no page ships React. The
+  // integration still writes its script for the browser into the build (dist/_astro/client.*.js),
+  // which no page loads.
+  integrations: [react()],
 
   // The posts written on Hatena Blog keep their URLs, which have no trailing slash
   // (/entry/2026/01/01/130022). Built as entry/2026/01/01/130022.html, GitHub Pages serves a post
