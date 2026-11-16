@@ -72,9 +72,10 @@ invokes it with `docker compose -f docker/compose.yaml run`.
 - **Search exists only in a build.** The build runs Pagefind after Astro (`build` in `package.json`); it indexes the
   built pages and writes the index into `dist/pagefind/`. The dev server has the search page without an index and says
   so: look at search with `make preview`. Only what is inside a post's `<article>` is indexed (`data-pagefind-body`),
-  less its link cards (`data-pagefind-ignore`) and the date in its header (every `time`, left out by the build
-  script); a page without that mark is never a search result. The date a result shows is given to the index on
-  the `<article>` itself (`data-pagefind-meta`)
+  less its link cards and the date in its header (`data-pagefind-ignore` on each); a page without that mark is
+  never a search result. The date a result shows is the header's, which the index keeps from its `time`
+  (`data-pagefind-meta`). The components know nothing of the index: they write the attributes they are handed
+  (`linkAttributes`, `dateAttributes`)
 - TypeScript stays on 6 while `@astrojs/check` does not accept 7 (`.github/dependabot.yml` says when to lift that)
 - Tests run on Node's own test runner (`node --test`, files named `*.test.ts` beside what they test), so a module a
   test loads imports its neighbours with the `.ts` extension. The pages themselves have no tests: they are verified by

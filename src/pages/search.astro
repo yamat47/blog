@@ -24,6 +24,10 @@ import { SITE } from "../site";
 </Base>
 
 <script>
+  // Only this function reaches the page: the package says its JavaScript has no side effects, so
+  // the bundler leaves the components, and React with them, out.
+  import { fullDate } from "@yamat47/pylon";
+
   // The search runs in the reader's browser, on the index the build writes beside the pages
   // (dist/pagefind/). Pagefind's own script is part of that index, so it is loaded from there
   // when the page opens and not bundled with this one.
@@ -44,10 +48,10 @@ import { SITE } from "../site";
     /** The words around the match. Pagefind escapes them and marks the match with `<mark>`. */
     excerpt: string;
     /**
-     * The post's title, and its date as YYYY-MM-DD, which its page gives the index
-     * (src/pages/entry/[...id].astro).
+     * The post's title, and its date as YYYY-MM-DD, which the index takes from the page
+     * (src/pages/entry/[...id].astro). A page that gave the index no date is still a result.
      */
-    meta: { title: string; date: string };
+    meta: { title: string; date?: string };
   }
 
   /** The part of Pagefind's script this page calls (https://pagefind.app/docs/api/). */
@@ -87,17 +91,11 @@ import { SITE } from "../site";
   }
 
   /**
-   * A found post as the design system's list of results takes one: its date, its title as a
-   * link, and the words around the match. The elements carry no class; the list styles them by
+   * A found post as the design system's list of results takes one: its date when the index has
+   * one, its title as a link, and the words around the match. The elements carry no class; the list styles them by
    * what they are.
    */
   function resultItem({ url, excerpt, meta }: Found): HTMLLIElement {
-    const date = document.createElement("time");
-    date.dateTime = meta.date;
-    // As the header of a post writes its date.
-    // TODO: use pylon's own function for this once it exports one, so the two cannot differ.
-    date.textContent = meta.date.replaceAll("-", ".");
-
     const link = document.createElement("a");
     // The site's URLs have no `.html` (build.format in astro.config.ts).
     link.href = url.replace(/\.html$/, "");
@@ -107,7 +105,13 @@ import { SITE } from "../site";
     text.innerHTML = excerpt;
 
     const item = document.createElement("li");
-    item.append(date, link, text);
+    if (meta.date !== undefined) {
+      const date = document.createElement("time");
+      date.dateTime = meta.date;
+      date.textContent = fullDate(meta.date);
+      item.append(date);
+    }
+    item.append(link, text);
     return item;
   }
 
