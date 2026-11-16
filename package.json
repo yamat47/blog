@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --host",
-    "build": "astro build --force && pagefind --site dist --exclude-selectors time",
+    "build": "astro build --force && pagefind --site dist",
     "preview": "astro preview --host",
     "typecheck": "astro check",
     "lint": "biome check --error-on-warnings .",
@@ -21,7 +21,7 @@
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.9",
     "@astrojs/react": "^7.1.9",
-    "@yamat47/pylon": "^0.2.0",
+    "@yamat47/pylon": "^0.3.0",
     "astro": "^7.4.11",
     "pagefind": "^1.6.0",
     "react": "^19.3.1",

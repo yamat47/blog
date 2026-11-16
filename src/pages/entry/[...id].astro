@@ -42,13 +42,15 @@ const day = formatDay(post.data.publishedAt);
   {
     // The data-pagefind attributes are for the search index, which the build makes from the built
     // pages. The article is what a post is found by: a page without this mark is never a result.
-    // The date is given to the index here, to be shown with a result. The one the header shows
-    // is not searched: the index leaves every `time` out (the build script in package.json).
-    // TODO: mark the header's date itself once pylon's `PageHeader` takes attributes for it, and
-    // drop the flag from the build script.
+    // The header's date is not searched, and it is what the index keeps to show with a result:
+    // the day as the `time` gives it to a machine (YYYY-MM-DD).
   }
-  <article data-pagefind-body data-pagefind-meta={`date:${day}`}>
-    <PageHeader title={post.data.title} date={day} />
+  <article data-pagefind-body>
+    <PageHeader
+      title={post.data.title}
+      date={day}
+      dateAttributes={{ "data-pagefind-ignore": "", "data-pagefind-meta": "date[datetime]" }}
+    />
     <Prose>
       <Content />
     </Prose>

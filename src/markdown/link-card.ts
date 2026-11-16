@@ -16,8 +16,8 @@ export interface LinkCard {
 }
 
 /**
- * The mark on a card's link, which keeps the card out of the search index and by which a card is
- * found again in a post's HTML.
+ * The mark on a card's link as it stands in a post's HTML, which keeps the card out of the search
+ * index and by which a card is found again there.
  */
 export const LINK_CARD_MARK = 'data-pagefind-ignore="all"';
 
@@ -33,18 +33,12 @@ export interface CardNode {
  * of itself cannot become markup.
  *
  * The card is kept out of the search index (`LINK_CARD_MARK`): its words are the linked page's,
- * and indexed they would make the post a result for what another page says. The component knows
- * nothing of the index, so the mark is put on its first tag here.
- *
- * TODO: pass the mark as a prop once pylon's `LinkCard` hands `data-*` attributes to its link, and
- * drop the edit of the rendered HTML.
+ * and indexed they would make the post a result for what another page says.
  */
 export function linkCardNode(card: LinkCard): CardNode {
-  const html = renderToStaticMarkup(createElement(Card, card));
-  if (!html.startsWith("<a ")) {
-    throw new Error(
-      "a link card no longer starts with its link, so it cannot be marked for the search index",
-    );
-  }
-  return { type: "html", value: html.replace("<a ", `<a ${LINK_CARD_MARK} `) };
+  const element = createElement(Card, {
+    ...card,
+    linkAttributes: { "data-pagefind-ignore": "all" },
+  });
+  return { type: "html", value: renderToStaticMarkup(element) };
 }

@@ -89,7 +89,7 @@ describe("linkCards", () => {
   });
 
   it("keeps a card out of the search index", async () => {
-    assert.match(await render("https://example.com/guide"), /^<a data-pagefind-ignore="all" /);
+    assert.match(await render("https://example.com/guide"), /^<a [^>]*data-pagefind-ignore="all"/);
   });
 
   it("names the site by its host and leaves out what the page does not have", async () => {
