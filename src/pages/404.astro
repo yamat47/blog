@@ -1,8 +1,11 @@
 ---
+import { PageHeader, Prose } from "@yamat47/pylon";
 import Base from "../layouts/Base.astro";
 ---
 
 <Base title="Not Found" path="/404">
-  <h1 class="post-title">Not Found</h1>
-  <p><a href="/">記事一覧へ</a></p>
+  <PageHeader title="Not Found" />
+  <Prose>
+    <p><a href="/">記事一覧へ</a></p>
+  </Prose>
 </Base>

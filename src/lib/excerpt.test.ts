@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { linkCardNode } from "../markdown/link-card.ts";
 import { excerpt } from "./excerpt.ts";
 
 describe("excerpt", () => {
@@ -24,8 +25,10 @@ describe("excerpt", () => {
     const html = [
       '<p><img __ASTRO_IMAGE_="{&quot;src&quot;:&quot;./photo.jpg&quot;}"></p>',
       "<p>はじめに</p>",
-      '<pre class="astro-code"><code><span class="line">const a = 1;</span></code></pre>',
-      '<a class="link-card" href="https://example.com/" data-pagefind-ignore="all"><span class="link-card-body"><span class="link-card-title">よそのページ</span></span></a>',
+      "<pre><code>const a = 1;</code></pre>",
+      // A card as a post's HTML has it, so that the excerpt and the card agree on its mark.
+      linkCardNode({ href: "https://example.com/", title: "よそのページ", site: "example.com" })
+        .value,
       "<script>window.x = 1;</script>",
       "<style>p { color: red; }</style>",
       "<p>おわりに</p>",

@@ -1,0 +1,4 @@
+# pnpm installs no version published less than a day ago. The design system is this site's own
+# package, published from its owner's repository, so a new version of it is installed at once.
+minimumReleaseAgeExclude:
+  - "@yamat47/pylon"

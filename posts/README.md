@@ -68,7 +68,7 @@ sites refuse programs and some are gone; for those, add the entry to `data/link-
 hand (only `title` is required). To fetch a page again, delete its entry.
 
 The thumbnail is loaded from the other site when a reader opens the post. One that no longer
-exists is dropped, and the card is shown without it.
+exists leaves its place on the card tinted.
 
 ## Images and captions
 

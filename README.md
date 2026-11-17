@@ -23,5 +23,8 @@ make check   # typecheck, lint, test, and build
 make help    # list the targets
 ```
 
+The look of the pages comes from [yamat47/pylon](https://github.com/yamat47/pylon), a design system
+installed as `@yamat47/pylon`: this repository holds no stylesheet.
+
 The actions and the agent skills under `.claude/skills/` come from
 [yamat47/github-toolkit](https://github.com/yamat47/github-toolkit).

@@ -81,14 +81,13 @@ const START_TAG = /<[a-zA-Z](?:"[^"]*"|'[^']*'|[^"'>])*>/g;
 
 /**
  * A post's HTML as a feed reader can show it: the reader is not on the site, so a URL that starts
- * at the site's root (an image, a link to another post) gets the site's address in front, and the
- * script a link card's thumbnail carries is taken off.
+ * at the site's root (an image, a link to another post) gets the site's address in front.
  *
  * Only tags are changed. A post that shows such HTML as code keeps it as written.
  */
 export function htmlForFeed(html: string, siteUrl: string): string {
   const origin = new URL(siteUrl).origin;
   return html.replace(START_TAG, (tag) =>
-    tag.replace(/(\s(?:href|src))="\/(?!\/)/g, `$1="${origin}/`).replace(/\sonerror="[^"]*"/g, ""),
+    tag.replace(/(\s(?:href|src))="\/(?!\/)/g, `$1="${origin}/`),
   );
 }

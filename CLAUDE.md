@@ -19,11 +19,10 @@ served by GitHub Pages. The blog used to be on Hatena Blog; the posts written th
 | `posts/` | The posts: one folder per post, `index.md` with its images beside it |
 | `src/content.config.ts` | The `posts` collection: where the files are and what frontmatter they must have |
 | `src/pages/` | The routes: the list of posts (`index.astro`), a post (`entry/[...id].astro`), the 404 page, the feed (`feed.xml.ts`, with `feed.ts` and `rss.ts` at the paths Hatena Blog used), the card a shared link shows (`og/[...id].png.ts` for a post, `og.png.ts` for the other pages), the search page (`search.astro`), and the privacy policy (`privacy.astro`) |
-| `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell, helpers for posts, dates, the feed and the share card, the site's name, address and time zone |
+| `src/layouts/`, `src/lib/`, `src/site.ts` | The page shell (`Base.astro`, with the header and footer every page has in `SiteFrame.tsx`), helpers for posts, dates, the feed and the share card, the site's name, address and time zone |
 | `fonts/` | The font the share cards are drawn with, where it is from (`README.md`), its license, and the font configuration that keeps other fonts out |
 | `src/markdown/` | Plugins for the Markdown processor (Sätteri, configured in `astro.config.ts`): links between posts, link cards, image captions |
 | `data/link-cards.json` | What link cards show about the pages posts link to. Written by the build when it fetches a new page, committed, and edited by hand for a page that cannot be fetched |
-| `src/styles/` | `tokens.css` holds every design value; `global.css` uses them |
 | `docker/` | Development image and compose |
 | `Makefile` | Entry point for development commands |
 
@@ -50,15 +49,21 @@ invokes it with `docker compose -f docker/compose.yaml run`.
   and bookmarks from outside
 - **No trailing slash.** `astro.config.ts` builds each page as a file (`entry/foo.html`) so that GitHub Pages serves it at
   `/entry/foo` without a redirect. Write internal links without a trailing slash and without `.html`
-- **Design values live in `src/styles/tokens.css` only.** Colors, sizes, weights and fonts are read through its variables
-  everywhere else. The look is a placeholder: a design system in its own repository (pylon) will replace that file, and
-  shared components will come from it. Do not grow a component library here. The share card is an image, so it keeps
-  its pixel sizes in `src/lib/og-card.ts` and is drawn with the font in `fonts/`; its colors are read from `tokens.css`
+- **The look comes from pylon, and nothing of it is written here.** The pages are built from the components of the
+  design system (`@yamat47/pylon`, from yamat47/pylon), and its stylesheet is the only one the site loads
+  (`src/layouts/Base.astro`). This repository has no stylesheet, no `style` and no class name: a page that would
+  need one is missing a component, which is added in pylon, released, and raised here. The components are React
+  rendered when the site is built; no page ships React, so nothing here uses a `client:` directive. Two things
+  are not components. The share card is an image, so it keeps its pixel sizes in `src/lib/og-card.ts` and is
+  drawn with the font in `fonts/`; its colors are read from the package's `tokens.json` (`src/lib/og.ts`). And
+  what the search script puts into the list of results is plain elements, which pylon's `SearchResults` styles by
+  what they are (its guideline says what an item is made of)
 - **Keep dependencies few.** The site was self-hosted once before and went back to Hatena because of upkeep. Prefer a
   small plugin written in this repository to a third-party integration, and make anything that fetches from the network
   at build time cache its result in the repository and fail soft, so that a dead link cannot block a post
 - **Text from another site is never written as HTML.** A link card's title and description come from the linked page.
-  They go into the Markdown tree as text nodes, which the processor escapes; do not build a card from an HTML string
+  The card is pylon's component, rendered to HTML by React (`src/markdown/link-card.ts`), which writes every text it
+  is given as text: that is the only way a text from a linked page reaches a post's HTML
 - **A script from another site is loaded only by the pages that need it.** There are two. X's widget script is loaded
   only by a post with a tweet in it (`src/lib/tweets.ts`). Google's tag, which reports visits to Google Analytics, is
   needed on every page, so it is in the layout, and it loads only on the published host (`googleTagId` in
@@ -67,7 +72,10 @@ invokes it with `docker compose -f docker/compose.yaml run`.
 - **Search exists only in a build.** The build runs Pagefind after Astro (`build` in `package.json`); it indexes the
   built pages and writes the index into `dist/pagefind/`. The dev server has the search page without an index and says
   so: look at search with `make preview`. Only what is inside a post's `<article>` is indexed (`data-pagefind-body`),
-  less its link cards (`data-pagefind-ignore`); a page without that mark is never a search result
+  less its link cards and the date in its header (`data-pagefind-ignore` on each); a page without that mark is
+  never a search result. The date a result shows is the header's, which the index keeps from its `time`
+  (`data-pagefind-meta`). The components know nothing of the index: they write the attributes they are handed
+  (`linkAttributes`, `dateAttributes`)
 - TypeScript stays on 6 while `@astrojs/check` does not accept 7 (`.github/dependabot.yml` says when to lift that)
 - Tests run on Node's own test runner (`node --test`, files named `*.test.ts` beside what they test), so a module a
   test loads imports its neighbours with the `.ts` extension. The pages themselves have no tests: they are verified by

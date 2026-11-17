@@ -1,4 +1,5 @@
 import { satteri } from "@astrojs/markdown-satteri";
+import react from "@astrojs/react";
 import { defineConfig } from "astro/config";
 import { captions } from "./src/markdown/captions.ts";
 import { createCardStore } from "./src/markdown/card-store.ts";
@@ -17,6 +18,12 @@ const cards = createCardStore({
 export default defineConfig({
   site: SITE.url,
 
+  // The pages are made of the design system's components (@yamat47/pylon), which are React. None
+  // is hydrated: they are rendered to HTML when the site is built, and no page ships React. The
+  // integration still writes its script for the browser into the build (dist/_astro/client.*.js),
+  // which no page loads.
+  integrations: [react()],
+
   // The posts written on Hatena Blog keep their URLs, which have no trailing slash
   // (/entry/2026/01/01/130022). Built as entry/2026/01/01/130022.html, GitHub Pages serves a post
   // at exactly that URL; built as a directory with index.html, it would redirect to the URL with
@@ -34,8 +41,10 @@ export default defineConfig({
       mdastPlugins: [linkCards({ postsDir, cards }), postLinks(postsDir), captions()],
     }),
 
-    // The highlighter writes var(--astro-code-*) instead of colors of its own, so code blocks take
-    // theirs from src/styles/tokens.css like everything else.
-    shikiConfig: { theme: "css-variables" },
+    // Code is left as plain text, which the design system sets on its tint. It has no colors for
+    // highlighted code yet, and a highlighter's own would not follow its light and dark.
+    // TODO: highlight again once pylon has those colors ("Not decided yet" in its CLAUDE.md). No
+    // post has a block of code so far.
+    syntaxHighlight: false,
   },
 });

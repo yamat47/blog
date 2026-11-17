@@ -1,7 +1,8 @@
 ---
-import "../styles/global.css";
+import "@yamat47/pylon/styles.css";
 import { OG_CARD_SIZE } from "../lib/og-card";
 import { SITE } from "../site";
+import { type PageWidth, SiteFrame } from "./SiteFrame";
 
 interface Props {
   /** The page's own title; omitted on the top page, which is titled by the site alone. */
@@ -17,9 +18,17 @@ interface Props {
   type?: "article" | "website";
   /** The URL path of the card a shared link shows; the site's card when omitted. */
   ogCardPath?: string;
+  /** How wide the content is; a column of text when omitted. */
+  width?: PageWidth;
 }
 
-const { title, path, type = "website", ogCardPath = SITE.ogCardPath } = Astro.props;
+const {
+  title,
+  path,
+  type = "website",
+  ogCardPath = SITE.ogCardPath,
+  width = "text",
+} = Astro.props;
 const fullTitle = title ? `${title} - ${SITE.title}` : SITE.title;
 const description = Astro.props.description || SITE.description;
 const canonical = new URL(path, Astro.site);
@@ -72,17 +81,8 @@ const siteHost = new URL(SITE.url).hostname;
     </script>
   </head>
   <body>
-    <header class="site-header">
-      <a class="site-title" href="/">{SITE.title}</a>
-      <nav class="site-nav">
-        <a href={SITE.searchPath}>検索</a>
-      </nav>
-    </header>
-    <main class="site-main">
+    <SiteFrame width={width} nameIsHeading={title === undefined}>
       <slot />
-    </main>
-    <footer class="site-footer">
-      <a href={SITE.privacyPath}>プライバシーポリシー</a>
-    </footer>
+    </SiteFrame>
   </body>
 </html>

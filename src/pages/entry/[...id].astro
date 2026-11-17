@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import { PageHeader, Prose } from "@yamat47/pylon";
 import Base from "../../layouts/Base.astro";
 import { formatDay } from "../../lib/date";
 import { excerpt } from "../../lib/excerpt";
@@ -24,6 +25,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const html = post.rendered?.html ?? "";
 const hasTweets = hasTweet(html);
+const day = formatDay(post.data.publishedAt);
 ---
 
 <Base
@@ -40,28 +42,32 @@ const hasTweets = hasTweet(html);
   {
     // The data-pagefind attributes are for the search index, which the build makes from the built
     // pages. The article is what a post is found by: a page without this mark is never a result.
-    // The date is shown with a result and is not itself searched.
+    // The header's date is not searched, and it is what the index keeps to show with a result:
+    // the day as the `time` gives it to a machine (YYYY-MM-DD).
   }
   <article data-pagefind-body>
-    <time
-      class="post-date"
-      datetime={post.data.publishedAt.toISOString()}
-      data-pagefind-meta="date"
-      data-pagefind-ignore
-    >
-      {formatDay(post.data.publishedAt)}
-    </time>
-    <h1 class="post-title">{post.data.title}</h1>
-    <div class="prose">
+    <PageHeader
+      title={post.data.title}
+      date={day}
+      dateAttributes={{ "data-pagefind-ignore": "", "data-pagefind-meta": "date[datetime]" }}
+    />
+    <Prose>
       <Content />
-    </div>
+    </Prose>
   </article>
   {
     // X's script turns each tweet's quote into the tweet as X shows it. Only a post that has a
     // tweet needs it, so only such a post loads it. Without it, or for a tweet that has been
     // deleted, the quote stays: the text, the author and a link.
+    // The page is dark for a reader whose system is, and X's script draws a light tweet unless
+    // it finds this meta when it runs, so the line before it adds one for such a reader.
     hasTweets && (
-      <script is:inline async src="https://platform.twitter.com/widgets.js" charset="utf-8" />
+      <Fragment>
+        <script is:inline>
+          matchMedia("(prefers-color-scheme: dark)").matches && document.head.insertAdjacentHTML("beforeend", '<meta name="twitter:widgets:theme" content="dark">');
+        </script>
+        <script is:inline async src="https://platform.twitter.com/widgets.js" charset="utf-8" />
+      </Fragment>
     )
   }
 </Base>

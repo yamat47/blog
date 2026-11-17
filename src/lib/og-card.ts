@@ -16,8 +16,8 @@ export interface OgCard {
   colors: { surface: string; ink: string; inkMuted: string };
 }
 
-// The card is an image, so its sizes are pixels of that image and live here, not in the
-// stylesheet. Its colors are the caller's, who reads them from the stylesheet.
+// The card is an image, so its sizes are pixels of that image and live here, not in the design
+// system. Its colors are the caller's, who reads them from the design system's tokens.
 const BAND_HEIGHT = 16;
 const MARGIN = 80;
 const TITLE_SIZE = 64;

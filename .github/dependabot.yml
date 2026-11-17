@@ -7,6 +7,8 @@
 #  - astro and @astrojs/markdown-satteri: one PR. astro depends on an exact version of the
 #    processor, and astro.config.ts builds the processor from the copy this repository declares,
 #    so a bump of one alone would leave two versions installed
+#  - react, react-dom and their types: one PR. They are released together, and react-dom accepts
+#    only the react of its own version
 version: 2
 
 updates:
@@ -23,6 +25,11 @@ updates:
     # replacements are common
     cooldown:
       default-days: 7
+      # The design system is this site's own package, published from its owner's repository, so
+      # a release of it arrives without the wait (pnpm-workspace.yaml lifts pnpm's for the same
+      # reason).
+      exclude:
+        - "@yamat47/pylon"
     commit-message:
       prefix: chore(deps)
       prefix-development: chore(deps-dev)
@@ -31,6 +38,12 @@ updates:
         patterns:
           - astro
           - "@astrojs/markdown-satteri"
+      react:
+        patterns:
+          - react
+          - react-dom
+          - "@types/react"
+          - "@types/react-dom"
       dev-dependencies:
         dependency-type: development
         update-types:
