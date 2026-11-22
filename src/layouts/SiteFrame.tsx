@@ -9,7 +9,7 @@ const search: LinkItem = { label: "検索", href: SITE.searchPath };
 const footerGroups = [
   { label: "サイト", links: [search, { label: "プライバシーポリシー", href: SITE.privacyPath }] },
   {
-    label: "ほかの場所",
+    label: "リンク",
     links: [
       { label: "X", href: "https://x.com/yamat47" },
       { label: "GitHub", href: "https://github.com/yamat47" },
