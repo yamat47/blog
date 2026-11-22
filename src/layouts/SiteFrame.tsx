@@ -1,6 +1,24 @@
-import { Page, SiteFooter, SiteHeader } from "@yamat47/pylon";
+import { type LinkItem, Page, SiteFooter, SiteHeader } from "@yamat47/pylon";
 import type { ComponentProps, ReactNode } from "react";
+import { formatDay } from "../lib/date.ts";
 import { SITE } from "../site.ts";
+
+const search: LinkItem = { label: "検索", href: SITE.searchPath };
+
+// The footer's links: the site's pages, and where else its author is.
+const footerGroups = [
+  { label: "サイト", links: [search, { label: "プライバシーポリシー", href: SITE.privacyPath }] },
+  {
+    label: "リンク",
+    links: [
+      { label: "X", href: "https://x.com/yamat47" },
+      { label: "GitHub", href: "https://github.com/yamat47" },
+    ],
+  },
+];
+
+// The copyright is stated for the year the site is built in, in its time zone.
+const copyright = { year: Number(formatDay(new Date()).slice(0, 4)), holder: SITE.author };
 
 /** How wide a page's content is: `wide` for the list of posts, `text` for a page to read. */
 export type PageWidth = ComponentProps<typeof Page>["width"];
@@ -30,10 +48,10 @@ export function SiteFrame({ width, nameIsHeading, children }: SiteFrameProps) {
           href="/"
           description={SITE.description}
           heading={nameIsHeading}
-          nav={[{ label: "検索", href: SITE.searchPath }]}
+          nav={[search]}
         />
       }
-      footer={<SiteFooter links={[{ label: "プライバシーポリシー", href: SITE.privacyPath }]} />}
+      footer={<SiteFooter name={SITE.title} href="/" groups={footerGroups} copyright={copyright} />}
     >
       {children}
     </Page>
