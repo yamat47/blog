@@ -15,8 +15,8 @@ importers:
         specifier: ^7.1.9
         version: 7.1.9(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.8(@types/node@26.6.6)(yaml@2.9.1))
       '@yamat47/pylon':
-        specifier: ^0.3.0
-        version: 0.3.0(react@19.3.1)
+        specifier: ^0.4.0
+        version: 0.4.0(react@19.3.1)
       astro:
         specifier: ^7.4.11
         version: 7.4.11(@types/node@26.6.6)(yaml@2.9.1)
@@ -858,8 +858,8 @@ packages:
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
 
-  '@yamat47/pylon@0.3.0':
-    resolution: {integrity: sha512-r9NnrYNiULpQWaO0ho8Yjnb0/KnPLqNDqjfRo92OQhocdKQ5te5L6RS78B4Xdhs4d8PlAKRqxeGcyTYOE3azQw==}
+  '@yamat47/pylon@0.4.0':
+    resolution: {integrity: sha512-In6k+nxOcOaqk6ZKc3rtPWYejlWHUWpVDnCYHdtdLHbUMC9XAT4VOFMc2k5+NB7taiGBTdLr2MP7BOXbbn6d/A==}
     peerDependencies:
       react: ^19.0.0
 
@@ -2525,7 +2525,7 @@ snapshots:
 
   '@vscode/l10n@0.0.18': {}
 
-  '@yamat47/pylon@0.3.0(react@19.3.1)':
+  '@yamat47/pylon@0.4.0(react@19.3.1)':
     dependencies:
       '@fontsource-variable/inter': 5.3.0
       '@fontsource-variable/noto-sans-jp': 5.3.1
