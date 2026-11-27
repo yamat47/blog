@@ -19,10 +19,10 @@
     "check": "pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run build"
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "^0.4.9",
+    "@astrojs/markdown-satteri": "^0.4.10",
     "@astrojs/react": "^7.1.9",
     "@yamat47/pylon": "^0.4.0",
-    "astro": "^7.4.11",
+    "astro": "^7.4.13",
     "pagefind": "^1.6.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
